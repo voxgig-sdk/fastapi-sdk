@@ -1,0 +1,67 @@
+<?php
+declare(strict_types=1);
+
+// Fastapi SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+FastapiUtility::setRegistrar(function (FastapiUtility $u): void {
+    $u->clean = [FastapiClean::class, 'call'];
+    $u->done = [FastapiDone::class, 'call'];
+    $u->make_error = [FastapiMakeError::class, 'call'];
+    $u->feature_add = [FastapiFeatureAdd::class, 'call'];
+    $u->feature_hook = [FastapiFeatureHook::class, 'call'];
+    $u->feature_init = [FastapiFeatureInit::class, 'call'];
+    $u->fetcher = [FastapiFetcher::class, 'call'];
+    $u->make_fetch_def = [FastapiMakeFetchDef::class, 'call'];
+    $u->make_context = [FastapiMakeContext::class, 'call'];
+    $u->make_options = [FastapiMakeOptions::class, 'call'];
+    $u->make_request = [FastapiMakeRequest::class, 'call'];
+    $u->make_response = [FastapiMakeResponse::class, 'call'];
+    $u->make_result = [FastapiMakeResult::class, 'call'];
+    $u->make_point = [FastapiMakePoint::class, 'call'];
+    $u->make_spec = [FastapiMakeSpec::class, 'call'];
+    $u->make_url = [FastapiMakeUrl::class, 'call'];
+    $u->param = [FastapiParam::class, 'call'];
+    $u->prepare_auth = [FastapiPrepareAuth::class, 'call'];
+    $u->prepare_body = [FastapiPrepareBody::class, 'call'];
+    $u->prepare_headers = [FastapiPrepareHeaders::class, 'call'];
+    $u->prepare_method = [FastapiPrepareMethod::class, 'call'];
+    $u->prepare_params = [FastapiPrepareParams::class, 'call'];
+    $u->prepare_path = [FastapiPreparePath::class, 'call'];
+    $u->prepare_query = [FastapiPrepareQuery::class, 'call'];
+    $u->result_basic = [FastapiResultBasic::class, 'call'];
+    $u->result_body = [FastapiResultBody::class, 'call'];
+    $u->result_headers = [FastapiResultHeaders::class, 'call'];
+    $u->transform_request = [FastapiTransformRequest::class, 'call'];
+    $u->transform_response = [FastapiTransformResponse::class, 'call'];
+});

@@ -1,0 +1,29 @@
+# Entity: robot
+
+main: kit: entity: robot: {
+
+  alias: field: {}
+
+  name: "robot"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/robots.txt"
+          parts: [
+            "robots.txt"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

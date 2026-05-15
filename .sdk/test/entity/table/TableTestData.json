@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "table": {
+      "TABLE00": {},
+      "TABLE01": {},
+      "TABLE02": {}
+    }
+  },
+  "new": {
+    "table": {
+      "table_ref01": {}
+    }
+  }
+}

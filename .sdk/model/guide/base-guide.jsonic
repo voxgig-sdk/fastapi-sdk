@@ -1,0 +1,44 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 6
+  metrics: count: method: 6
+
+  entity: index_get: {
+    path: "/": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: iprank: {
+    path: "/stat/iprank": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: json: {
+    path: "/json": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: robot: {
+    path: "/robots.txt": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: simple: {
+    path: "/simple": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: table: {
+    path: "/table": {
+      op: load: method: *GET
+    }
+  }
+
+}

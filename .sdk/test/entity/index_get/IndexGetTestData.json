@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "index_get": {
+      "INDEX_GET00": {},
+      "INDEX_GET01": {},
+      "INDEX_GET02": {}
+    }
+  },
+  "new": {
+    "index_get": {
+      "index_get_ref01": {}
+    }
+  }
+}

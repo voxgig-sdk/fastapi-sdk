@@ -1,0 +1,29 @@
+# Entity: table
+
+main: kit: entity: table: {
+
+  alias: field: {}
+
+  name: "table"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/table"
+          parts: [
+            "table"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

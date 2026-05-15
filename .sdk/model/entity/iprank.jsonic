@@ -1,0 +1,30 @@
+# Entity: iprank
+
+main: kit: entity: iprank: {
+
+  alias: field: {}
+
+  name: "iprank"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/stat/iprank"
+          parts: [
+            "stat"
+            "iprank"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

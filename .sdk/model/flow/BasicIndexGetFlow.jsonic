@@ -1,0 +1,28 @@
+# BasicIndexGetFlow
+
+main: kit: flow: BasicIndexGetFlow:
+{
+  entity: "index_get",
+  kind: "basic",
+  name: "BasicIndexGetFlow",
+  step: [
+    {
+      input: {
+        ref: "index_get_ref01",
+        srcdatavar: "index_get_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-index_get_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIndexGetFlow"
+}

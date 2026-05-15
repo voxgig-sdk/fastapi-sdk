@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "simple": {
+      "SIMPLE00": {},
+      "SIMPLE01": {},
+      "SIMPLE02": {}
+    }
+  },
+  "new": {
+    "simple": {
+      "simple_ref01": {}
+    }
+  }
+}

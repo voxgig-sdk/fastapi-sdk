@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "robot": {
+      "ROBOT00": {},
+      "ROBOT01": {},
+      "ROBOT02": {}
+    }
+  },
+  "new": {
+    "robot": {
+      "robot_ref01": {}
+    }
+  }
+}

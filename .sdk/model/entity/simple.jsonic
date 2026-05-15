@@ -1,0 +1,29 @@
+# Entity: simple
+
+main: kit: entity: simple: {
+
+  alias: field: {}
+
+  name: "simple"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/simple"
+          parts: [
+            "simple"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

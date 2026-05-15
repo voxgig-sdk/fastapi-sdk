@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "json": {
+      "JSON00": {},
+      "JSON01": {},
+      "JSON02": {}
+    }
+  },
+  "new": {
+    "json": {
+      "json_ref01": {}
+    }
+  }
+}
