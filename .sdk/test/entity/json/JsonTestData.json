@@ -1,9 +1,15 @@
 {
   "existing": {
     "json": {
-      "JSON00": {},
-      "JSON01": {},
-      "JSON02": {}
+      "JSON00": {
+        "id": "JSON00"
+      },
+      "JSON01": {
+        "id": "JSON01"
+      },
+      "JSON02": {
+        "id": "JSON02"
+      }
     }
   },
   "new": {

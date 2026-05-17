@@ -1,9 +1,15 @@
 {
   "existing": {
     "index_get": {
-      "INDEX_GET00": {},
-      "INDEX_GET01": {},
-      "INDEX_GET02": {}
+      "INDEX_GET00": {
+        "id": "INDEX_GET00"
+      },
+      "INDEX_GET01": {
+        "id": "INDEX_GET01"
+      },
+      "INDEX_GET02": {
+        "id": "INDEX_GET02"
+      }
     }
   },
   "new": {

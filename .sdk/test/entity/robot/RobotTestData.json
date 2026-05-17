@@ -1,9 +1,15 @@
 {
   "existing": {
     "robot": {
-      "ROBOT00": {},
-      "ROBOT01": {},
-      "ROBOT02": {}
+      "ROBOT00": {
+        "id": "ROBOT00"
+      },
+      "ROBOT01": {
+        "id": "ROBOT01"
+      },
+      "ROBOT02": {
+        "id": "ROBOT02"
+      }
     }
   },
   "new": {

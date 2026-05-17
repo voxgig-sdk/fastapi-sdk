@@ -1,9 +1,15 @@
 {
   "existing": {
     "simple": {
-      "SIMPLE00": {},
-      "SIMPLE01": {},
-      "SIMPLE02": {}
+      "SIMPLE00": {
+        "id": "SIMPLE00"
+      },
+      "SIMPLE01": {
+        "id": "SIMPLE01"
+      },
+      "SIMPLE02": {
+        "id": "SIMPLE02"
+      }
     }
   },
   "new": {

@@ -1,9 +1,15 @@
 {
   "existing": {
     "table": {
-      "TABLE00": {},
-      "TABLE01": {},
-      "TABLE02": {}
+      "TABLE00": {
+        "id": "TABLE00"
+      },
+      "TABLE01": {
+        "id": "TABLE01"
+      },
+      "TABLE02": {
+        "id": "TABLE02"
+      }
     }
   },
   "new": {

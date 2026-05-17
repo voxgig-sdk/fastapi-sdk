@@ -1,10 +1,10 @@
 package voxgigfastapisdk
 
 import (
-	"github.com/voxgig-sdk/fastapi-sdk/core"
-	"github.com/voxgig-sdk/fastapi-sdk/entity"
-	"github.com/voxgig-sdk/fastapi-sdk/feature"
-	_ "github.com/voxgig-sdk/fastapi-sdk/utility"
+	"github.com/voxgig-sdk/fastapi-sdk/go/core"
+	"github.com/voxgig-sdk/fastapi-sdk/go/entity"
+	"github.com/voxgig-sdk/fastapi-sdk/go/feature"
+	_ "github.com/voxgig-sdk/fastapi-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

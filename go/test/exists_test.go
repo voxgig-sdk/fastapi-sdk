@@ -3,7 +3,7 @@ package sdktest
 import (
 	"testing"
 
-	sdk "github.com/voxgig-sdk/fastapi-sdk"
+	sdk "github.com/voxgig-sdk/fastapi-sdk/go"
 )
 
 func TestExists(t *testing.T) {

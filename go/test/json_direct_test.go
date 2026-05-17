@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/fastapi-sdk"
-	"github.com/voxgig-sdk/fastapi-sdk/core"
+	sdk "github.com/voxgig-sdk/fastapi-sdk/go"
+	"github.com/voxgig-sdk/fastapi-sdk/go/core"
 )
 
 func TestJsonDirect(t *testing.T) {

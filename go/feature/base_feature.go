@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/fastapi-sdk/core"
+	"github.com/voxgig-sdk/fastapi-sdk/go/core"
 )
 
 type BaseFeature struct {
