@@ -117,7 +117,6 @@ func iprankBasicSetup(extra map[string]any) *entityTestSetup {
 		"FASTAPI_TEST_IPRANK_ENTID": idmap,
 		"FASTAPI_TEST_LIVE":      "FALSE",
 		"FASTAPI_TEST_EXPLAIN":   "FALSE",
-		"FASTAPI_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["FASTAPI_TEST_IPRANK_ENTID"])
@@ -128,7 +127,6 @@ func iprankBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["FASTAPI_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["FASTAPI_APIKEY"],
 			},
 			extra,
 		})

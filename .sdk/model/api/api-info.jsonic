@@ -11,8 +11,30 @@ main: {
       ]
       title: "FastAPI"
       version: "0.1.0"
+      tagline: "Look up geolocation, network and robot-detection info for any IP address via realip.cc"
+      homepage: "https://realip.cc"
+      docs_url: "https://realip.cc/docs"
+      about_md: `[realip.cc](https://realip.cc) is a free IP geolocation and network-info service built on FastAPI and maintained by Bboysoul. The OpenAPI document is titled simply "FastAPI" because it inherits the framework default, but the actual product is IP lookup at \`https://realip.cc\`.
+
+What you typically get back for a given IP address:
+
+- IP address, city, province, country, continent and ISO country code
+- ISP / network owner and network range
+- Coordinates (latitude / longitude) and postal code
+- Timezone
+- Data update timestamp
+- A robot / bot classification signal and an IP rank score
+
+Operational notes: the service is open and does not document an API key requirement. Concurrent requests are rate-limited (specific thresholds are not published). CORS is reported as disabled, so calls are best made from server-side code. Human-readable docs live at \`/docs\` (Swagger UI). The author also publishes a blog at [bboy.app](https://www.bboy.app).`
+      entity_desc: {
+        index_get: "Root lookup that returns IP geolocation and network info for the caller (or a supplied IP) — served from `/`."
+        iprank: "IP reputation / rank score for a given address, used to gauge how suspicious an IP is."
+        json: "JSON-formatted IP info response variant."
+        robot: "Robot / bot detection signal indicating whether the IP looks like an automated client."
+        simple: "Minimal / plain-text variant of the IP lookup response."
+        table: "Tabular (human-readable) variant of the IP lookup response."
+      }
+      auth: false
     }
   }
-}
-
 }

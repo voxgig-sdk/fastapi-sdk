@@ -20,9 +20,6 @@ class FastapiConfig
             ],
             "options" => [
                 "base" => "https://realip.cc",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

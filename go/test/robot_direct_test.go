@@ -99,14 +99,12 @@ func robotDirectSetup(mockres any) *robotDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FASTAPI_TEST_ROBOT_ENTID": map[string]any{},
 		"FASTAPI_TEST_LIVE":    "FALSE",
-		"FASTAPI_APIKEY":       "NONE",
 	})
 
 	live := env["FASTAPI_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["FASTAPI_APIKEY"],
 		}
 		client := sdk.NewFastapiSDK(mergedOpts)
 
