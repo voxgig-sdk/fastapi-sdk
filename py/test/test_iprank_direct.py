@@ -59,12 +59,14 @@ def _iprank_direct_setup(mockres):
     env = runner.env_override({
         "FASTAPI_TEST_IPRANK_ENTID": {},
         "FASTAPI_TEST_LIVE": "FALSE",
+        "FASTAPI_APIKEY": "NONE",
     })
 
     live = env.get("FASTAPI_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("FASTAPI_APIKEY"),
         }
         client = FastapiSDK(merged_opts)
         return {

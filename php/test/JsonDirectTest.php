@@ -67,12 +67,14 @@ function json_direct_setup($mockres)
     $env = Runner::env_override([
         "FASTAPI_TEST_JSON_ENTID" => [],
         "FASTAPI_TEST_LIVE" => "FALSE",
+        "FASTAPI_APIKEY" => "NONE",
     ]);
 
     $live = $env["FASTAPI_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["FASTAPI_APIKEY"],
         ];
         $client = new FastapiSDK($merged_opts);
         return [

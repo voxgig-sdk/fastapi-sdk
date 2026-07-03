@@ -91,6 +91,7 @@ function simple_basic_setup(extra)
     ["FASTAPI_TEST_SIMPLE_ENTID"] = idmap,
     ["FASTAPI_TEST_LIVE"] = "FALSE",
     ["FASTAPI_TEST_EXPLAIN"] = "FALSE",
+    ["FASTAPI_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function simple_basic_setup(extra)
   if env["FASTAPI_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["FASTAPI_APIKEY"],
       },
       extra or {},
     })

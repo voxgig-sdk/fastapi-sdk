@@ -74,12 +74,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'FASTAPI_TEST_ROBOT_ENTID': {},
     'FASTAPI_TEST_LIVE': 'FALSE',
+    'FASTAPI_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.FASTAPI_TEST_LIVE
 
   if (live) {
     const client = new FastapiSDK({
+      apikey: env.FASTAPI_APIKEY,
     })
 
     let idmap: any = env['FASTAPI_TEST_ROBOT_ENTID']

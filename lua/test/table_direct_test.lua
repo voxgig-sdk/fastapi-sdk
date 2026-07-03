@@ -62,12 +62,14 @@ function table_direct_setup(mockres)
   local env = runner.env_override({
     ["FASTAPI_TEST_TABLE_ENTID"] = {},
     ["FASTAPI_TEST_LIVE"] = "FALSE",
+    ["FASTAPI_APIKEY"] = "NONE",
   })
 
   local live = env["FASTAPI_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["FASTAPI_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

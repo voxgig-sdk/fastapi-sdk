@@ -61,12 +61,14 @@ def index_get_direct_setup(mockres)
   env = Runner.env_override({
     "FASTAPI_TEST_INDEX_GET_ENTID" => {},
     "FASTAPI_TEST_LIVE" => "FALSE",
+    "FASTAPI_APIKEY" => "NONE",
   })
 
   live = env["FASTAPI_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["FASTAPI_APIKEY"],
     }
     client = FastapiSDK.new(merged_opts)
     return {

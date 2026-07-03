@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -114,7 +114,7 @@ local index_get = client:IndexGet(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:IndexGet(nil):load({ id = "index_get_id" }, nil)
+local result, err = client:IndexGet():load({ id = "index_get_id" })
 ```
 
 ### Common Methods
@@ -160,7 +160,7 @@ local iprank = client:Iprank(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Iprank(nil):load({ id = "iprank_id" }, nil)
+local result, err = client:Iprank():load({ id = "iprank_id" })
 ```
 
 ### Common Methods
@@ -206,7 +206,7 @@ local json = client:Json(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Json(nil):load({ id = "json_id" }, nil)
+local result, err = client:Json():load({ id = "json_id" })
 ```
 
 ### Common Methods
@@ -252,7 +252,7 @@ local robot = client:Robot(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Robot(nil):load({ id = "robot_id" }, nil)
+local result, err = client:Robot():load({ id = "robot_id" })
 ```
 
 ### Common Methods
@@ -298,7 +298,7 @@ local simple = client:Simple(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Simple(nil):load({ id = "simple_id" }, nil)
+local result, err = client:Simple():load({ id = "simple_id" })
 ```
 
 ### Common Methods
@@ -344,7 +344,7 @@ local table = client:Table(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Table(nil):load({ id = "table_id" }, nil)
+local result, err = client:Table():load({ id = "table_id" })
 ```
 
 ### Common Methods

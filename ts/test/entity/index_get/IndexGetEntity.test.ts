@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'FASTAPI_TEST_INDEX_GET_ENTID': idmap,
     'FASTAPI_TEST_LIVE': 'FALSE',
     'FASTAPI_TEST_EXPLAIN': 'FALSE',
+    'FASTAPI_APIKEY': 'NONE',
   })
 
   idmap = env['FASTAPI_TEST_INDEX_GET_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new FastapiSDK(merge([
       {
+        apikey: env.FASTAPI_APIKEY,
       },
       extra
     ]))

@@ -99,12 +99,14 @@ func tableDirectSetup(mockres any) *tableDirectSetupResult {
 	env := envOverride(map[string]any{
 		"FASTAPI_TEST_TABLE_ENTID": map[string]any{},
 		"FASTAPI_TEST_LIVE":    "FALSE",
+		"FASTAPI_APIKEY":       "NONE",
 	})
 
 	live := env["FASTAPI_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["FASTAPI_APIKEY"],
 		}
 		client := sdk.NewFastapiSDK(mergedOpts)
 

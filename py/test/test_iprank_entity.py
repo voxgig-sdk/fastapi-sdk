@@ -91,6 +91,7 @@ def _iprank_basic_setup(extra):
         "FASTAPI_TEST_IPRANK_ENTID": idmap,
         "FASTAPI_TEST_LIVE": "FALSE",
         "FASTAPI_TEST_EXPLAIN": "FALSE",
+        "FASTAPI_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _iprank_basic_setup(extra):
     if env.get("FASTAPI_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("FASTAPI_APIKEY"),
             },
             extra or {},
         ])

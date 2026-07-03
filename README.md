@@ -1,23 +1,8 @@
 # Fastapi SDK
 
-Look up geolocation, network and robot-detection info for any IP address via realip.cc
+FastAPI client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About FastAPI
-
-[realip.cc](https://realip.cc) is a free IP geolocation and network-info service built on FastAPI and maintained by Bboysoul. The OpenAPI document is titled simply "FastAPI" because it inherits the framework default, but the actual product is IP lookup at `https://realip.cc`.
-
-What you typically get back for a given IP address:
-
-- IP address, city, province, country, continent and ISO country code
-- ISP / network owner and network range
-- Coordinates (latitude / longitude) and postal code
-- Timezone
-- Data update timestamp
-- A robot / bot classification signal and an IP rank score
-
-Operational notes: the service is open and does not document an API key requirement. Concurrent requests are rate-limited (specific thresholds are not published). CORS is reported as disabled, so calls are best made from server-side code. Human-readable docs live at `/docs` (Swagger UI). The author also publishes a blog at [bboy.app](https://www.bboy.app).
 
 ## Try it
 
@@ -51,27 +36,31 @@ gem install fastapi-sdk
 luarocks install fastapi-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { FastapiSDK } from 'fastapi'
 
-const client = new FastapiSDK({})
+const client = new FastapiSDK({
+  apikey: process.env.FASTAPI_APIKEY,
+})
 
+// Load indexget data
+const indexget = await client.IndexGet().load({})
+console.log(indexget.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,12 +90,12 @@ The API exposes 6 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **IndexGet** | Root lookup that returns IP geolocation and network info for the caller (or a supplied IP) — served from `/`. | `/` |
-| **Iprank** | IP reputation / rank score for a given address, used to gauge how suspicious an IP is. | `/stat/iprank` |
-| **Json** | JSON-formatted IP info response variant. | `/json` |
-| **Robot** | Robot / bot detection signal indicating whether the IP looks like an automated client. | `/robots.txt` |
-| **Simple** | Minimal / plain-text variant of the IP lookup response. | `/simple` |
-| **Table** | Tabular (human-readable) variant of the IP lookup response. | `/table` |
+| **IndexGet** |  | `/` |
+| **Iprank** |  | `/stat/iprank` |
+| **Json** |  | `/json` |
+| **Robot** |  | `/robots.txt` |
+| **Simple** |  | `/simple` |
+| **Table** |  | `/table` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -116,15 +105,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from fastapi_sdk import FastapiSDK
 
-client = FastapiSDK({})
+client = FastapiSDK({
+    "apikey": os.environ.get("FASTAPI_APIKEY"),
+})
 
 
 # Load a specific indexget
-indexget, err = client.IndexGet(None).load(
-    {"id": "example_id"}, None
-)
+indexget, err = client.IndexGet().load({"id": "example_id"})
+print(indexget)
 ```
 
 ### PHP
@@ -133,13 +124,14 @@ indexget, err = client.IndexGet(None).load(
 <?php
 require_once 'fastapi_sdk.php';
 
-$client = new FastapiSDK([]);
+$client = new FastapiSDK([
+    "apikey" => getenv("FASTAPI_APIKEY"),
+]);
 
 
 // Load a specific indexget
-[$indexget, $err] = $client->IndexGet(null)->load(
-    ["id" => "example_id"], null
-);
+[$indexget, $err] = $client->IndexGet()->load(["id" => "example_id"]);
+print_r($indexget);
 ```
 
 ### Golang
@@ -147,8 +139,13 @@ $client = new FastapiSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/fastapi-sdk/go"
 
-client := sdk.NewFastapiSDK(map[string]any{})
+client := sdk.NewFastapiSDK(map[string]any{
+    "apikey": os.Getenv("FASTAPI_APIKEY"),
+})
 
+// Load indexget data
+indexget, err := client.IndexGet(nil).Load(map[string]any{}, nil)
+fmt.Println(indexget)
 ```
 
 ### Ruby
@@ -156,13 +153,14 @@ client := sdk.NewFastapiSDK(map[string]any{})
 ```ruby
 require_relative "Fastapi_sdk"
 
-client = FastapiSDK.new({})
+client = FastapiSDK.new({
+  "apikey" => ENV["FASTAPI_APIKEY"],
+})
 
 
 # Load a specific indexget
-indexget, err = client.IndexGet(nil).load(
-  { "id" => "example_id" }, nil
-)
+indexget, err = client.IndexGet().load({ "id" => "example_id" })
+puts indexget
 ```
 
 ### Lua
@@ -170,13 +168,14 @@ indexget, err = client.IndexGet(nil).load(
 ```lua
 local sdk = require("fastapi_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("FASTAPI_APIKEY"),
+})
 
 
 -- Load a specific indexget
-local indexget, err = client:IndexGet(nil):load(
-  { id = "example_id" }, nil
-)
+local indexget, err = client:IndexGet():load({ id = "example_id" })
+print(indexget)
 ```
 
 ## Unit testing in offline mode
@@ -195,25 +194,21 @@ const result = await client.IndexGet().load({ id: 'test01' })
 ### Python
 
 ```python
-client = FastapiSDK.test(None, None)
-result, err = client.IndexGet(None).load(
-    {"id": "test01"}, None
-)
+client = FastapiSDK.test()
+result, err = client.IndexGet().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = FastapiSDK::test(null, null);
-[$result, $err] = $client->IndexGet(null)->load(
-    ["id" => "test01"], null
-);
+$client = FastapiSDK::test();
+[$result, $err] = $client->IndexGet()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.IndexGet(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -222,19 +217,15 @@ result, err := client.IndexGet(nil).Load(
 ### Ruby
 
 ```ruby
-client = FastapiSDK.test(nil, nil)
-result, err = client.IndexGet(nil).load(
-  { "id" => "test01" }, nil
-)
+client = FastapiSDK.test
+result, err = client.IndexGet().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:IndexGet(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:IndexGet():load({ id = "test01" })
 ```
 
 ## How it works
@@ -338,11 +329,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the FastAPI
-
-- Upstream: [https://realip.cc](https://realip.cc)
-- API docs: [https://realip.cc/docs](https://realip.cc/docs)
 
 ---
 

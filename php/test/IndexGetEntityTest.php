@@ -85,6 +85,7 @@ function index_get_basic_setup($extra)
         "FASTAPI_TEST_INDEX_GET_ENTID" => $idmap,
         "FASTAPI_TEST_LIVE" => "FALSE",
         "FASTAPI_TEST_EXPLAIN" => "FALSE",
+        "FASTAPI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -96,6 +97,7 @@ function index_get_basic_setup($extra)
     if ($env["FASTAPI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["FASTAPI_APIKEY"],
             ],
             $extra ?? [],
         ]);
