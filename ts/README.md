@@ -10,7 +10,7 @@ The TypeScript SDK for the Fastapi API — a type-safe, entity-oriented client w
 
 ## Install
 ```bash
-npm install fastapi
+npm install @voxgig-sdk/fastapi
 ```
 ## Tutorial: your first API call
 

@@ -10,7 +10,7 @@ The PHP SDK for the Fastapi API — an entity-oriented client using PHP conventi
 
 ## Install
 ```bash
-composer require voxgig/fastapi-sdk
+composer require voxgig-sdk/fastapi
 ```
 
 

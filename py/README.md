@@ -10,7 +10,7 @@ The Python SDK for the Fastapi API — an entity-oriented client following Pytho
 
 ## Install
 ```bash
-pip install fastapi-sdk
+pip install voxgig-sdk-fastapi
 ```
 
 Or install from source:

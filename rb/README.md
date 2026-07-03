@@ -10,13 +10,13 @@ The Ruby SDK for the Fastapi API — an entity-oriented client using idiomatic R
 
 ## Install
 ```bash
-gem install fastapi-sdk
+gem install voxgig-sdk-fastapi
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "fastapi-sdk"
+gem "voxgig-sdk-fastapi"
 ```
 
 Then run:

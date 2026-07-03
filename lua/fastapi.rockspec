@@ -8,12 +8,14 @@ source = {
   dir = "fastapi-sdk/lua"
 }
 description = {
-  summary = "Fastapi SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Fast public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/fastapi-sdk",
+  issues_url = "https://github.com/voxgig-sdk/fastapi-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "fastapi" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {
