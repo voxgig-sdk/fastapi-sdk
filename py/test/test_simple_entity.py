@@ -49,8 +49,7 @@ class TestSimpleEntity:
         # LOAD
         simple_ref01_ent = client.Simple(None)
         simple_ref01_match_dt0 = {}
-        simple_ref01_data_dt0_loaded, err = simple_ref01_ent.load(simple_ref01_match_dt0, None)
-        assert err is None
+        simple_ref01_data_dt0_loaded = simple_ref01_ent.load(simple_ref01_match_dt0, None)
         assert simple_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _simple_basic_setup(extra):
         "FASTAPI_TEST_SIMPLE_ENTID": idmap,
         "FASTAPI_TEST_LIVE": "FALSE",
         "FASTAPI_TEST_EXPLAIN": "FALSE",
-        "FASTAPI_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _simple_basic_setup(extra):
     if env.get("FASTAPI_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("FASTAPI_APIKEY"),
             },
             extra or {},
         ])

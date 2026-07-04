@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Simple,
+  SimpleLoadMatch,
+} from '../FastapiTypes'
 
 // TODO: needs Entity superclass
-class SimpleEntity extends FastapiEntityBase {
+class SimpleEntity extends FastapiEntityBase<Simple> {
 
   constructor(client: FastapiSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class SimpleEntity extends FastapiEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: SimpleLoadMatch, ctrl?: Control): Promise<Simple> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class SimpleEntity extends FastapiEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Simple> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

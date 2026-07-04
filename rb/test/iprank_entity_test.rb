@@ -42,8 +42,7 @@ class IprankEntityTest < Minitest::Test
     # LOAD
     iprank_ref01_ent = client.Iprank(nil)
     iprank_ref01_match_dt0 = {}
-    iprank_ref01_data_dt0_loaded, err = iprank_ref01_ent.load(iprank_ref01_match_dt0, nil)
-    assert_nil err
+    iprank_ref01_data_dt0_loaded = iprank_ref01_ent.load(iprank_ref01_match_dt0, nil)
     assert !iprank_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def iprank_basic_setup(extra)
     "FASTAPI_TEST_IPRANK_ENTID" => idmap,
     "FASTAPI_TEST_LIVE" => "FALSE",
     "FASTAPI_TEST_EXPLAIN" => "FALSE",
-    "FASTAPI_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def iprank_basic_setup(extra)
   if env["FASTAPI_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["FASTAPI_APIKEY"],
       },
       extra || {},
     ])

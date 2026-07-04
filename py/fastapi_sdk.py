@@ -144,16 +144,23 @@ class FastapiSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class FastapiSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,40 +212,106 @@ class FastapiSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def index_get(self):
+        """Idiomatic facade: client.index_get.list() / client.index_get.load({"id": ...})."""
+        from entity.index_get_entity import IndexGetEntity
+        cached = getattr(self, "_index_get", None)
+        if cached is None:
+            cached = IndexGetEntity(self, None)
+            self._index_get = cached
+        return cached
 
     def IndexGet(self, data=None):
+        # Deprecated: use client.index_get instead.
         from entity.index_get_entity import IndexGetEntity
         return IndexGetEntity(self, data)
 
 
+    @property
+    def iprank(self):
+        """Idiomatic facade: client.iprank.list() / client.iprank.load({"id": ...})."""
+        from entity.iprank_entity import IprankEntity
+        cached = getattr(self, "_iprank", None)
+        if cached is None:
+            cached = IprankEntity(self, None)
+            self._iprank = cached
+        return cached
+
     def Iprank(self, data=None):
+        # Deprecated: use client.iprank instead.
         from entity.iprank_entity import IprankEntity
         return IprankEntity(self, data)
 
 
+    @property
+    def json(self):
+        """Idiomatic facade: client.json.list() / client.json.load({"id": ...})."""
+        from entity.json_entity import JsonEntity
+        cached = getattr(self, "_json", None)
+        if cached is None:
+            cached = JsonEntity(self, None)
+            self._json = cached
+        return cached
+
     def Json(self, data=None):
+        # Deprecated: use client.json instead.
         from entity.json_entity import JsonEntity
         return JsonEntity(self, data)
 
 
+    @property
+    def robot(self):
+        """Idiomatic facade: client.robot.list() / client.robot.load({"id": ...})."""
+        from entity.robot_entity import RobotEntity
+        cached = getattr(self, "_robot", None)
+        if cached is None:
+            cached = RobotEntity(self, None)
+            self._robot = cached
+        return cached
+
     def Robot(self, data=None):
+        # Deprecated: use client.robot instead.
         from entity.robot_entity import RobotEntity
         return RobotEntity(self, data)
 
 
+    @property
+    def simple(self):
+        """Idiomatic facade: client.simple.list() / client.simple.load({"id": ...})."""
+        from entity.simple_entity import SimpleEntity
+        cached = getattr(self, "_simple", None)
+        if cached is None:
+            cached = SimpleEntity(self, None)
+            self._simple = cached
+        return cached
+
     def Simple(self, data=None):
+        # Deprecated: use client.simple instead.
         from entity.simple_entity import SimpleEntity
         return SimpleEntity(self, data)
 
 
+    @property
+    def table(self):
+        """Idiomatic facade: client.table.list() / client.table.load({"id": ...})."""
+        from entity.table_entity import TableEntity
+        cached = getattr(self, "_table", None)
+        if cached is None:
+            cached = TableEntity(self, None)
+            self._table = cached
+        return cached
+
     def Table(self, data=None):
+        # Deprecated: use client.table instead.
         from entity.table_entity import TableEntity
         return TableEntity(self, data)
 

@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -170,7 +169,7 @@ Alias for `FastapiSDK.test()`.
 ## IndexGetEntity
 
 ```ts
-const index_get = client.IndexGet()
+const index_get = client.index_get
 ```
 
 ### Operations
@@ -180,7 +179,7 @@ const index_get = client.IndexGet()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.IndexGet().load({ id: 'index_get_id' })
+const result = await client.index_get.load({ id: 'index_get_id' })
 ```
 
 ### Common Methods
@@ -214,7 +213,7 @@ Return a copy of the entity options.
 ## IprankEntity
 
 ```ts
-const iprank = client.Iprank()
+const iprank = client.iprank
 ```
 
 ### Operations
@@ -224,7 +223,7 @@ const iprank = client.Iprank()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Iprank().load({ id: 'iprank_id' })
+const result = await client.iprank.load({ id: 'iprank_id' })
 ```
 
 ### Common Methods
@@ -258,7 +257,7 @@ Return a copy of the entity options.
 ## JsonEntity
 
 ```ts
-const json = client.Json()
+const json = client.json
 ```
 
 ### Operations
@@ -268,7 +267,7 @@ const json = client.Json()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Json().load({ id: 'json_id' })
+const result = await client.json.load({ id: 'json_id' })
 ```
 
 ### Common Methods
@@ -302,7 +301,7 @@ Return a copy of the entity options.
 ## RobotEntity
 
 ```ts
-const robot = client.Robot()
+const robot = client.robot
 ```
 
 ### Operations
@@ -312,7 +311,7 @@ const robot = client.Robot()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Robot().load({ id: 'robot_id' })
+const result = await client.robot.load({ id: 'robot_id' })
 ```
 
 ### Common Methods
@@ -346,7 +345,7 @@ Return a copy of the entity options.
 ## SimpleEntity
 
 ```ts
-const simple = client.Simple()
+const simple = client.simple
 ```
 
 ### Operations
@@ -356,7 +355,7 @@ const simple = client.Simple()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Simple().load({ id: 'simple_id' })
+const result = await client.simple.load({ id: 'simple_id' })
 ```
 
 ### Common Methods
@@ -390,7 +389,7 @@ Return a copy of the entity options.
 ## TableEntity
 
 ```ts
-const table = client.Table()
+const table = client.table
 ```
 
 ### Operations
@@ -400,7 +399,7 @@ const table = client.Table()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Table().load({ id: 'table_id' })
+const result = await client.table.load({ id: 'table_id' })
 ```
 
 ### Common Methods

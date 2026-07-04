@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch IndexGetLoadMatch
+---@param ctrl? table
+---@return IndexGet
+---@return string? err
 function IndexGetEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

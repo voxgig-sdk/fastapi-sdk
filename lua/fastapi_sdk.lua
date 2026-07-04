@@ -244,36 +244,114 @@ end
 
 
 
+-- Idiomatic facade: client:index_get():list() / client:index_get():load({ id = ... })
+function FastapiSDK:index_get(data)
+  local EntityMod = require("entity.index_get_entity")
+  if data == nil then
+    if self._index_get == nil then
+      self._index_get = EntityMod.new(self, nil)
+    end
+    return self._index_get
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:index_get() instead.
 function FastapiSDK:IndexGet(data)
   local EntityMod = require("entity.index_get_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:iprank():list() / client:iprank():load({ id = ... })
+function FastapiSDK:iprank(data)
+  local EntityMod = require("entity.iprank_entity")
+  if data == nil then
+    if self._iprank == nil then
+      self._iprank = EntityMod.new(self, nil)
+    end
+    return self._iprank
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:iprank() instead.
 function FastapiSDK:Iprank(data)
   local EntityMod = require("entity.iprank_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:json():list() / client:json():load({ id = ... })
+function FastapiSDK:json(data)
+  local EntityMod = require("entity.json_entity")
+  if data == nil then
+    if self._json == nil then
+      self._json = EntityMod.new(self, nil)
+    end
+    return self._json
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:json() instead.
 function FastapiSDK:Json(data)
   local EntityMod = require("entity.json_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:robot():list() / client:robot():load({ id = ... })
+function FastapiSDK:robot(data)
+  local EntityMod = require("entity.robot_entity")
+  if data == nil then
+    if self._robot == nil then
+      self._robot = EntityMod.new(self, nil)
+    end
+    return self._robot
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:robot() instead.
 function FastapiSDK:Robot(data)
   local EntityMod = require("entity.robot_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:simple():list() / client:simple():load({ id = ... })
+function FastapiSDK:simple(data)
+  local EntityMod = require("entity.simple_entity")
+  if data == nil then
+    if self._simple == nil then
+      self._simple = EntityMod.new(self, nil)
+    end
+    return self._simple
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:simple() instead.
 function FastapiSDK:Simple(data)
   local EntityMod = require("entity.simple_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:table():list() / client:table():load({ id = ... })
+function FastapiSDK:table(data)
+  local EntityMod = require("entity.table_entity")
+  if data == nil then
+    if self._table == nil then
+      self._table = EntityMod.new(self, nil)
+    end
+    return self._table
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:table() instead.
 function FastapiSDK:Table(data)
   local EntityMod = require("entity.table_entity")
   return EntityMod.new(self, data)

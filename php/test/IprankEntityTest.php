@@ -49,8 +49,7 @@ class IprankEntityTest extends TestCase
         // LOAD
         $iprank_ref01_ent = $client->Iprank(null);
         $iprank_ref01_match_dt0 = [];
-        [$iprank_ref01_data_dt0_loaded, $err] = $iprank_ref01_ent->load($iprank_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $iprank_ref01_data_dt0_loaded = $iprank_ref01_ent->load($iprank_ref01_match_dt0, null);
         $this->assertNotNull($iprank_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function iprank_basic_setup($extra)
         "FASTAPI_TEST_IPRANK_ENTID" => $idmap,
         "FASTAPI_TEST_LIVE" => "FALSE",
         "FASTAPI_TEST_EXPLAIN" => "FALSE",
-        "FASTAPI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function iprank_basic_setup($extra)
     if ($env["FASTAPI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FASTAPI_APIKEY"],
             ],
             $extra ?? [],
         ]);

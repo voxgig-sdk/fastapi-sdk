@@ -42,8 +42,7 @@ class RobotEntityTest < Minitest::Test
     # LOAD
     robot_ref01_ent = client.Robot(nil)
     robot_ref01_match_dt0 = {}
-    robot_ref01_data_dt0_loaded, err = robot_ref01_ent.load(robot_ref01_match_dt0, nil)
-    assert_nil err
+    robot_ref01_data_dt0_loaded = robot_ref01_ent.load(robot_ref01_match_dt0, nil)
     assert !robot_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def robot_basic_setup(extra)
     "FASTAPI_TEST_ROBOT_ENTID" => idmap,
     "FASTAPI_TEST_LIVE" => "FALSE",
     "FASTAPI_TEST_EXPLAIN" => "FALSE",
-    "FASTAPI_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def robot_basic_setup(extra)
   if env["FASTAPI_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["FASTAPI_APIKEY"],
       },
       extra || {},
     ])

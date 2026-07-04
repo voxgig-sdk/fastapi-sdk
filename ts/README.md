@@ -9,9 +9,12 @@ The TypeScript SDK for the Fastapi API — a type-safe, entity-oriented client w
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/fastapi
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/fastapi-sdk/releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { FastapiSDK } from 'fastapi'
+import { FastapiSDK } from '@voxgig-sdk/fastapi'
 
-const client = new FastapiSDK({
-  apikey: process.env.FASTAPI_APIKEY,
-})
+const client = new FastapiSDK()
 ```
 
-### 3. Load a indexget
+### 3. Load an indexget
 
 ```ts
-const result = await client.IndexGet().load({ id: 'example_id' })
+const result = await client.indexget.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FastapiSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.indexget.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new FastapiSDK({ apikey: '...' })
+const client = new FastapiSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.indexget
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new FastapiSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -134,7 +134,6 @@ Create a `.env.local` file at the project root:
 
 ```
 FASTAPI_TEST_LIVE=TRUE
-FASTAPI_APIKEY=<your-key>
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new FastapiSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new FastapiSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -315,7 +312,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `const index_get = client.IndexGet()`
+Create an instance: `const index_get = client.index_get`
 
 #### Operations
 
@@ -326,13 +323,13 @@ Create an instance: `const index_get = client.IndexGet()`
 #### Example: Load
 
 ```ts
-const index_get = await client.IndexGet().load({ id: 'index_get_id' })
+const index_get = await client.index_get.load({ id: 'index_get_id' })
 ```
 
 
 ### Iprank
 
-Create an instance: `const iprank = client.Iprank()`
+Create an instance: `const iprank = client.iprank`
 
 #### Operations
 
@@ -343,13 +340,13 @@ Create an instance: `const iprank = client.Iprank()`
 #### Example: Load
 
 ```ts
-const iprank = await client.Iprank().load({ id: 'iprank_id' })
+const iprank = await client.iprank.load({ id: 'iprank_id' })
 ```
 
 
 ### Json
 
-Create an instance: `const json = client.Json()`
+Create an instance: `const json = client.json`
 
 #### Operations
 
@@ -360,13 +357,13 @@ Create an instance: `const json = client.Json()`
 #### Example: Load
 
 ```ts
-const json = await client.Json().load({ id: 'json_id' })
+const json = await client.json.load({ id: 'json_id' })
 ```
 
 
 ### Robot
 
-Create an instance: `const robot = client.Robot()`
+Create an instance: `const robot = client.robot`
 
 #### Operations
 
@@ -377,13 +374,13 @@ Create an instance: `const robot = client.Robot()`
 #### Example: Load
 
 ```ts
-const robot = await client.Robot().load({ id: 'robot_id' })
+const robot = await client.robot.load({ id: 'robot_id' })
 ```
 
 
 ### Simple
 
-Create an instance: `const simple = client.Simple()`
+Create an instance: `const simple = client.simple`
 
 #### Operations
 
@@ -394,13 +391,13 @@ Create an instance: `const simple = client.Simple()`
 #### Example: Load
 
 ```ts
-const simple = await client.Simple().load({ id: 'simple_id' })
+const simple = await client.simple.load({ id: 'simple_id' })
 ```
 
 
 ### Table
 
-Create an instance: `const table = client.Table()`
+Create an instance: `const table = client.table`
 
 #### Operations
 
@@ -411,7 +408,7 @@ Create an instance: `const table = client.Table()`
 #### Example: Load
 
 ```ts
-const table = await client.Table().load({ id: 'table_id' })
+const table = await client.table.load({ id: 'table_id' })
 ```
 
 
@@ -472,7 +469,7 @@ fastapi/
 Import the SDK from the package root:
 
 ```ts
-import { FastapiSDK } from 'fastapi'
+import { FastapiSDK } from '@voxgig-sdk/fastapi'
 ```
 
 ### Entity state
@@ -482,11 +479,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const indexget = client.indexget
+await indexget.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// indexget.data() now returns the loaded indexget data
+// indexget.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

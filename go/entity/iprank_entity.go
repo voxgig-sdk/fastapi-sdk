@@ -85,6 +85,27 @@ func (e *IprankEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Iprank; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *IprankEntity) DataTyped(data ...Iprank) Iprank {
+	if len(data) > 0 {
+		return typedFrom[Iprank](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Iprank](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Iprank (all fields
+// optional at the wire level).
+func (e *IprankEntity) MatchTyped(match ...Iprank) Iprank {
+	if len(match) > 0 {
+		return typedFrom[Iprank](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Iprank](e.Match())
+}
+
 
 func (e *IprankEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *IprankEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, 
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// IprankLoadMatch and returns an Iprank. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *IprankEntity) LoadTyped(reqmatch IprankLoadMatch, ctrl map[string]any) (Iprank, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Iprank{}, err
+	}
+	return typedFrom[Iprank](res), nil
 }
 
 

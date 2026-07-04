@@ -49,8 +49,7 @@ class TestIndexGetEntity:
         # LOAD
         index_get_ref01_ent = client.IndexGet(None)
         index_get_ref01_match_dt0 = {}
-        index_get_ref01_data_dt0_loaded, err = index_get_ref01_ent.load(index_get_ref01_match_dt0, None)
-        assert err is None
+        index_get_ref01_data_dt0_loaded = index_get_ref01_ent.load(index_get_ref01_match_dt0, None)
         assert index_get_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _index_get_basic_setup(extra):
         "FASTAPI_TEST_INDEX_GET_ENTID": idmap,
         "FASTAPI_TEST_LIVE": "FALSE",
         "FASTAPI_TEST_EXPLAIN": "FALSE",
-        "FASTAPI_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _index_get_basic_setup(extra):
     if env.get("FASTAPI_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("FASTAPI_APIKEY"),
             },
             extra or {},
         ])

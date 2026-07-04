@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Iprank,
+  IprankLoadMatch,
+} from '../FastapiTypes'
 
 // TODO: needs Entity superclass
-class IprankEntity extends FastapiEntityBase {
+class IprankEntity extends FastapiEntityBase<Iprank> {
 
   constructor(client: FastapiSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class IprankEntity extends FastapiEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: IprankLoadMatch, ctrl?: Control): Promise<Iprank> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class IprankEntity extends FastapiEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Iprank> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

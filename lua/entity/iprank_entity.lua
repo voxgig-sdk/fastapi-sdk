@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch IprankLoadMatch
+---@param ctrl? table
+---@return Iprank
+---@return string? err
 function IprankEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  IndexGet,
+  IndexGetLoadMatch,
+} from '../FastapiTypes'
 
 // TODO: needs Entity superclass
-class IndexGetEntity extends FastapiEntityBase {
+class IndexGetEntity extends FastapiEntityBase<IndexGet> {
 
   constructor(client: FastapiSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class IndexGetEntity extends FastapiEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: IndexGetLoadMatch, ctrl?: Control): Promise<IndexGet> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class IndexGetEntity extends FastapiEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<IndexGet> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

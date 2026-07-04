@@ -9,12 +9,9 @@ The Lua SDK for the Fastapi API — an entity-oriented client using Lua conventi
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-fastapi
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("fastapi_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("FASTAPI_APIKEY"),
-})
+local client = sdk.new()
 ```
 
-### 3. Load a indexget
+### 3. Load an indexget
 
 ```lua
-local result, err = client:IndexGet():load({ id = "example_id" })
+local result, err = client:indexget():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Fastapi():load({ id = "test01" })
+local result, err = client:indexget():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -121,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 FASTAPI_TEST_LIVE=TRUE
-FASTAPI_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -270,7 +263,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `const index_get = client.IndexGet()`
+Create an instance: `const index_get = client.index_get`
 
 #### Operations
 
@@ -281,13 +274,13 @@ Create an instance: `const index_get = client.IndexGet()`
 #### Example: Load
 
 ```ts
-const index_get = await client.IndexGet().load({ id: 'index_get_id' })
+const index_get = await client.index_get.load({ id: 'index_get_id' })
 ```
 
 
 ### Iprank
 
-Create an instance: `const iprank = client.Iprank()`
+Create an instance: `const iprank = client.iprank`
 
 #### Operations
 
@@ -298,13 +291,13 @@ Create an instance: `const iprank = client.Iprank()`
 #### Example: Load
 
 ```ts
-const iprank = await client.Iprank().load({ id: 'iprank_id' })
+const iprank = await client.iprank.load({ id: 'iprank_id' })
 ```
 
 
 ### Json
 
-Create an instance: `const json = client.Json()`
+Create an instance: `const json = client.json`
 
 #### Operations
 
@@ -315,13 +308,13 @@ Create an instance: `const json = client.Json()`
 #### Example: Load
 
 ```ts
-const json = await client.Json().load({ id: 'json_id' })
+const json = await client.json.load({ id: 'json_id' })
 ```
 
 
 ### Robot
 
-Create an instance: `const robot = client.Robot()`
+Create an instance: `const robot = client.robot`
 
 #### Operations
 
@@ -332,13 +325,13 @@ Create an instance: `const robot = client.Robot()`
 #### Example: Load
 
 ```ts
-const robot = await client.Robot().load({ id: 'robot_id' })
+const robot = await client.robot.load({ id: 'robot_id' })
 ```
 
 
 ### Simple
 
-Create an instance: `const simple = client.Simple()`
+Create an instance: `const simple = client.simple`
 
 #### Operations
 
@@ -349,13 +342,13 @@ Create an instance: `const simple = client.Simple()`
 #### Example: Load
 
 ```ts
-const simple = await client.Simple().load({ id: 'simple_id' })
+const simple = await client.simple.load({ id: 'simple_id' })
 ```
 
 
 ### Table
 
-Create an instance: `const table = client.Table()`
+Create an instance: `const table = client.table`
 
 #### Operations
 
@@ -366,7 +359,7 @@ Create an instance: `const table = client.Table()`
 #### Example: Load
 
 ```ts
-const table = await client.Table().load({ id: 'table_id' })
+const table = await client.table.load({ id: 'table_id' })
 ```
 
 
@@ -441,11 +434,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local indexget = client:indexget()
+indexget:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- indexget:data_get() now returns the loaded indexget data
+-- indexget:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

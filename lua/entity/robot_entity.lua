@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch RobotLoadMatch
+---@param ctrl? table
+---@return Robot
+---@return string? err
 function RobotEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

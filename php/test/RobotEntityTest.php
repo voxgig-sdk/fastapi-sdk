@@ -49,8 +49,7 @@ class RobotEntityTest extends TestCase
         // LOAD
         $robot_ref01_ent = $client->Robot(null);
         $robot_ref01_match_dt0 = [];
-        [$robot_ref01_data_dt0_loaded, $err] = $robot_ref01_ent->load($robot_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $robot_ref01_data_dt0_loaded = $robot_ref01_ent->load($robot_ref01_match_dt0, null);
         $this->assertNotNull($robot_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function robot_basic_setup($extra)
         "FASTAPI_TEST_ROBOT_ENTID" => $idmap,
         "FASTAPI_TEST_LIVE" => "FALSE",
         "FASTAPI_TEST_EXPLAIN" => "FALSE",
-        "FASTAPI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function robot_basic_setup($extra)
     if ($env["FASTAPI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FASTAPI_APIKEY"],
             ],
             $extra ?? [],
         ]);

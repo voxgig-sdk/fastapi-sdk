@@ -7,6 +7,8 @@ import { RobotEntity } from './entity/RobotEntity'
 import { SimpleEntity } from './entity/SimpleEntity'
 import { TableEntity } from './entity/TableEntity'
 
+export type * from './FastapiTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -207,36 +209,84 @@ class FastapiSDK {
 
 
 
+  _index_get?: IndexGetEntity
+
+  // Idiomatic facade: `client.index_get.list()` / `client.index_get.load({ id })`.
+  get index_get(): IndexGetEntity {
+    return (this._index_get ??= new IndexGetEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.index_get` instead. */
   IndexGet(data?: any) {
     const self = this
     return new IndexGetEntity(self,data)
   }
 
 
+  _iprank?: IprankEntity
+
+  // Idiomatic facade: `client.iprank.list()` / `client.iprank.load({ id })`.
+  get iprank(): IprankEntity {
+    return (this._iprank ??= new IprankEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.iprank` instead. */
   Iprank(data?: any) {
     const self = this
     return new IprankEntity(self,data)
   }
 
 
+  _json?: JsonEntity
+
+  // Idiomatic facade: `client.json.list()` / `client.json.load({ id })`.
+  get json(): JsonEntity {
+    return (this._json ??= new JsonEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.json` instead. */
   Json(data?: any) {
     const self = this
     return new JsonEntity(self,data)
   }
 
 
+  _robot?: RobotEntity
+
+  // Idiomatic facade: `client.robot.list()` / `client.robot.load({ id })`.
+  get robot(): RobotEntity {
+    return (this._robot ??= new RobotEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.robot` instead. */
   Robot(data?: any) {
     const self = this
     return new RobotEntity(self,data)
   }
 
 
+  _simple?: SimpleEntity
+
+  // Idiomatic facade: `client.simple.list()` / `client.simple.load({ id })`.
+  get simple(): SimpleEntity {
+    return (this._simple ??= new SimpleEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.simple` instead. */
   Simple(data?: any) {
     const self = this
     return new SimpleEntity(self,data)
   }
 
 
+  _table?: TableEntity
+
+  // Idiomatic facade: `client.table.list()` / `client.table.load({ id })`.
+  get table(): TableEntity {
+    return (this._table ??= new TableEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.table` instead. */
   Table(data?: any) {
     const self = this
     return new TableEntity(self,data)

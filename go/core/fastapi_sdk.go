@@ -245,31 +245,49 @@ func (sdk *FastapiSDK) Direct(fetchargs map[string]any) (map[string]any, error) 
 }
 
 
+// IndexGet returns a IndexGet entity bound to this client.
+// Idiomatic usage: client.IndexGet(nil).List(nil, nil) or
+// client.IndexGet(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FastapiSDK) IndexGet(data map[string]any) FastapiEntity {
 	return NewIndexGetEntityFunc(sdk, data)
 }
 
 
+// Iprank returns a Iprank entity bound to this client.
+// Idiomatic usage: client.Iprank(nil).List(nil, nil) or
+// client.Iprank(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FastapiSDK) Iprank(data map[string]any) FastapiEntity {
 	return NewIprankEntityFunc(sdk, data)
 }
 
 
+// Json returns a Json entity bound to this client.
+// Idiomatic usage: client.Json(nil).List(nil, nil) or
+// client.Json(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FastapiSDK) Json(data map[string]any) FastapiEntity {
 	return NewJsonEntityFunc(sdk, data)
 }
 
 
+// Robot returns a Robot entity bound to this client.
+// Idiomatic usage: client.Robot(nil).List(nil, nil) or
+// client.Robot(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FastapiSDK) Robot(data map[string]any) FastapiEntity {
 	return NewRobotEntityFunc(sdk, data)
 }
 
 
+// Simple returns a Simple entity bound to this client.
+// Idiomatic usage: client.Simple(nil).List(nil, nil) or
+// client.Simple(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FastapiSDK) Simple(data map[string]any) FastapiEntity {
 	return NewSimpleEntityFunc(sdk, data)
 }
 
 
+// Table returns a Table entity bound to this client.
+// Idiomatic usage: client.Table(nil).List(nil, nil) or
+// client.Table(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *FastapiSDK) Table(data map[string]any) FastapiEntity {
 	return NewTableEntityFunc(sdk, data)
 }

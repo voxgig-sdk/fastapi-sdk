@@ -42,8 +42,7 @@ class TableEntityTest < Minitest::Test
     # LOAD
     table_ref01_ent = client.Table(nil)
     table_ref01_match_dt0 = {}
-    table_ref01_data_dt0_loaded, err = table_ref01_ent.load(table_ref01_match_dt0, nil)
-    assert_nil err
+    table_ref01_data_dt0_loaded = table_ref01_ent.load(table_ref01_match_dt0, nil)
     assert !table_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def table_basic_setup(extra)
     "FASTAPI_TEST_TABLE_ENTID" => idmap,
     "FASTAPI_TEST_LIVE" => "FALSE",
     "FASTAPI_TEST_EXPLAIN" => "FALSE",
-    "FASTAPI_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def table_basic_setup(extra)
   if env["FASTAPI_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["FASTAPI_APIKEY"],
       },
       extra || {},
     ])

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Robot,
+  RobotLoadMatch,
+} from '../FastapiTypes'
 
 // TODO: needs Entity superclass
-class RobotEntity extends FastapiEntityBase {
+class RobotEntity extends FastapiEntityBase<Robot> {
 
   constructor(client: FastapiSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class RobotEntity extends FastapiEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: RobotLoadMatch, ctrl?: Control): Promise<Robot> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class RobotEntity extends FastapiEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Robot> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

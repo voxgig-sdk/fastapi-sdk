@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Fastapi_types'
+
 
 class FastapiSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class FastapiSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class FastapiSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue FastapiError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = FastapiHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class FastapiSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,46 +198,88 @@ class FastapiSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.index_get.list / client.index_get.load({ "id" => ... })
+  def index_get
+    require_relative 'entity/index_get_entity'
+    @index_get ||= IndexGetEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.index_get instead.
   def IndexGet(data = nil)
     require_relative 'entity/index_get_entity'
     IndexGetEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.iprank.list / client.iprank.load({ "id" => ... })
+  def iprank
+    require_relative 'entity/iprank_entity'
+    @iprank ||= IprankEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.iprank instead.
   def Iprank(data = nil)
     require_relative 'entity/iprank_entity'
     IprankEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.json.list / client.json.load({ "id" => ... })
+  def json
+    require_relative 'entity/json_entity'
+    @json ||= JsonEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.json instead.
   def Json(data = nil)
     require_relative 'entity/json_entity'
     JsonEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.robot.list / client.robot.load({ "id" => ... })
+  def robot
+    require_relative 'entity/robot_entity'
+    @robot ||= RobotEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.robot instead.
   def Robot(data = nil)
     require_relative 'entity/robot_entity'
     RobotEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.simple.list / client.simple.load({ "id" => ... })
+  def simple
+    require_relative 'entity/simple_entity'
+    @simple ||= SimpleEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.simple instead.
   def Simple(data = nil)
     require_relative 'entity/simple_entity'
     SimpleEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.table.list / client.table.load({ "id" => ... })
+  def table
+    require_relative 'entity/table_entity'
+    @table ||= TableEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.table instead.
   def Table(data = nil)
     require_relative 'entity/table_entity'
     TableEntity.new(self, data)

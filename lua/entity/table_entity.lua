@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch TableLoadMatch
+---@param ctrl? table
+---@return Table
+---@return string? err
 function TableEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

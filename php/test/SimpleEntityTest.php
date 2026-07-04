@@ -49,8 +49,7 @@ class SimpleEntityTest extends TestCase
         // LOAD
         $simple_ref01_ent = $client->Simple(null);
         $simple_ref01_match_dt0 = [];
-        [$simple_ref01_data_dt0_loaded, $err] = $simple_ref01_ent->load($simple_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $simple_ref01_data_dt0_loaded = $simple_ref01_ent->load($simple_ref01_match_dt0, null);
         $this->assertNotNull($simple_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function simple_basic_setup($extra)
         "FASTAPI_TEST_SIMPLE_ENTID" => $idmap,
         "FASTAPI_TEST_LIVE" => "FALSE",
         "FASTAPI_TEST_EXPLAIN" => "FALSE",
-        "FASTAPI_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function simple_basic_setup($extra)
     if ($env["FASTAPI_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["FASTAPI_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `$options` | `array` | SDK configuration options. |
-| `$options["apikey"]` | `string` | API key for authentication. |
 | `$options["base"]` | `string` | Base URL for API requests. |
 | `$options["prefix"]` | `string` | URL prefix appended after base. |
 | `$options["suffix"]` | `string` | URL suffix appended after path. |
@@ -76,7 +75,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -90,11 +92,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -102,17 +105,17 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## IndexGetEntity
 
 ```php
-$index_get = $client->IndexGet();
+$index_get = $client->index_get();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->IndexGet()->load(["id" => "index_get_id"]);
+$result = $client->index_get()->load(["id" => "index_get_id"]);
 ```
 
 ### Common Methods
@@ -148,17 +151,17 @@ Return the entity name.
 ## IprankEntity
 
 ```php
-$iprank = $client->Iprank();
+$iprank = $client->iprank();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Iprank()->load(["id" => "iprank_id"]);
+$result = $client->iprank()->load(["id" => "iprank_id"]);
 ```
 
 ### Common Methods
@@ -194,17 +197,17 @@ Return the entity name.
 ## JsonEntity
 
 ```php
-$json = $client->Json();
+$json = $client->json();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Json()->load(["id" => "json_id"]);
+$result = $client->json()->load(["id" => "json_id"]);
 ```
 
 ### Common Methods
@@ -240,17 +243,17 @@ Return the entity name.
 ## RobotEntity
 
 ```php
-$robot = $client->Robot();
+$robot = $client->robot();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Robot()->load(["id" => "robot_id"]);
+$result = $client->robot()->load(["id" => "robot_id"]);
 ```
 
 ### Common Methods
@@ -286,17 +289,17 @@ Return the entity name.
 ## SimpleEntity
 
 ```php
-$simple = $client->Simple();
+$simple = $client->simple();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Simple()->load(["id" => "simple_id"]);
+$result = $client->simple()->load(["id" => "simple_id"]);
 ```
 
 ### Common Methods
@@ -332,17 +335,17 @@ Return the entity name.
 ## TableEntity
 
 ```php
-$table = $client->Table();
+$table = $client->table();
 ```
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Table()->load(["id" => "table_id"]);
+$result = $client->table()->load(["id" => "table_id"]);
 ```
 
 ### Common Methods
