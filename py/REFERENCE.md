@@ -100,7 +100,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## IndexGetEntity
 
 ```python
-index_get = client.index_get
+index_get = client.IndexGet()
 ```
 
 ### Operations
@@ -110,7 +110,7 @@ index_get = client.index_get
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.index_get.load({"id": "index_get_id"})
+result = client.IndexGet().load({"id": "index_get_id"})
 ```
 
 ### Common Methods
@@ -145,7 +145,7 @@ Return the entity name.
 ## IprankEntity
 
 ```python
-iprank = client.iprank
+iprank = client.Iprank()
 ```
 
 ### Operations
@@ -155,7 +155,7 @@ iprank = client.iprank
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.iprank.load({"id": "iprank_id"})
+result = client.Iprank().load({"id": "iprank_id"})
 ```
 
 ### Common Methods
@@ -190,7 +190,7 @@ Return the entity name.
 ## JsonEntity
 
 ```python
-json = client.json
+json = client.Json()
 ```
 
 ### Operations
@@ -200,7 +200,7 @@ json = client.json
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.json.load({"id": "json_id"})
+result = client.Json().load({"id": "json_id"})
 ```
 
 ### Common Methods
@@ -235,7 +235,7 @@ Return the entity name.
 ## RobotEntity
 
 ```python
-robot = client.robot
+robot = client.Robot()
 ```
 
 ### Operations
@@ -245,7 +245,7 @@ robot = client.robot
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.robot.load({"id": "robot_id"})
+result = client.Robot().load({"id": "robot_id"})
 ```
 
 ### Common Methods
@@ -280,7 +280,7 @@ Return the entity name.
 ## SimpleEntity
 
 ```python
-simple = client.simple
+simple = client.Simple()
 ```
 
 ### Operations
@@ -290,7 +290,7 @@ simple = client.simple
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.simple.load({"id": "simple_id"})
+result = client.Simple().load({"id": "simple_id"})
 ```
 
 ### Common Methods
@@ -325,7 +325,7 @@ Return the entity name.
 ## TableEntity
 
 ```python
-table = client.table
+table = client.Table()
 ```
 
 ### Operations
@@ -335,7 +335,7 @@ table = client.table
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.table.load({"id": "table_id"})
+result = client.Table().load({"id": "table_id"})
 ```
 
 ### Common Methods

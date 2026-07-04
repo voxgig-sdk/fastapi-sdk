@@ -106,7 +106,7 @@ same parameters as `direct()`. Raises on error.
 ## IndexGetEntity
 
 ```ruby
-index_get = client.index_get
+index_get = client.IndexGet
 ```
 
 ### Operations
@@ -116,7 +116,7 @@ index_get = client.index_get
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.index_get.load({ "id" => "index_get_id" })
+result = client.IndexGet.load({ "id" => "index_get_id" })
 ```
 
 ### Common Methods
@@ -152,7 +152,7 @@ Return the entity name.
 ## IprankEntity
 
 ```ruby
-iprank = client.iprank
+iprank = client.Iprank
 ```
 
 ### Operations
@@ -162,7 +162,7 @@ iprank = client.iprank
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.iprank.load({ "id" => "iprank_id" })
+result = client.Iprank.load({ "id" => "iprank_id" })
 ```
 
 ### Common Methods
@@ -198,7 +198,7 @@ Return the entity name.
 ## JsonEntity
 
 ```ruby
-json = client.json
+json = client.Json
 ```
 
 ### Operations
@@ -208,7 +208,7 @@ json = client.json
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.json.load({ "id" => "json_id" })
+result = client.Json.load({ "id" => "json_id" })
 ```
 
 ### Common Methods
@@ -244,7 +244,7 @@ Return the entity name.
 ## RobotEntity
 
 ```ruby
-robot = client.robot
+robot = client.Robot
 ```
 
 ### Operations
@@ -254,7 +254,7 @@ robot = client.robot
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.robot.load({ "id" => "robot_id" })
+result = client.Robot.load({ "id" => "robot_id" })
 ```
 
 ### Common Methods
@@ -290,7 +290,7 @@ Return the entity name.
 ## SimpleEntity
 
 ```ruby
-simple = client.simple
+simple = client.Simple
 ```
 
 ### Operations
@@ -300,7 +300,7 @@ simple = client.simple
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.simple.load({ "id" => "simple_id" })
+result = client.Simple.load({ "id" => "simple_id" })
 ```
 
 ### Common Methods
@@ -336,7 +336,7 @@ Return the entity name.
 ## TableEntity
 
 ```ruby
-table = client.table
+table = client.Table
 ```
 
 ### Operations
@@ -346,7 +346,7 @@ table = client.table
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.table.load({ "id" => "table_id" })
+result = client.Table.load({ "id" => "table_id" })
 ```
 
 ### Common Methods

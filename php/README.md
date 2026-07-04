@@ -33,9 +33,10 @@ $client = new FastapiSDK();
 
 ```php
 try {
-    $result = $client->indexget()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare IndexGet record (throws on error).
+    $indexget = $client->IndexGet()->load(["id" => "example_id"]);
+    print_r($indexget);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -81,13 +82,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = FastapiSDK::test();
+$client = FastapiSDK::test([
+    "entity" => ["indexget" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->indexget()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$indexget = $client->IndexGet()->load(["id" => "test01"]);
+print_r($indexget);
 ```
 
 ### Use a custom fetch function
@@ -166,8 +171,8 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `IndexGet` | `($data): IndexGetEntity` | Create a IndexGet entity instance. |
-| `Iprank` | `($data): IprankEntity` | Create a Iprank entity instance. |
+| `IndexGet` | `($data): IndexGetEntity` | Create an IndexGet entity instance. |
+| `Iprank` | `($data): IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `($data): JsonEntity` | Create a Json entity instance. |
 | `Robot` | `($data): RobotEntity` | Create a Robot entity instance. |
 | `Simple` | `($data): SimpleEntity` | Create a Simple entity instance. |
@@ -272,7 +277,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `const index_get = client.index_get`
+Create an instance: `$index_get = $client->IndexGet();`
 
 #### Operations
 
@@ -282,14 +287,15 @@ Create an instance: `const index_get = client.index_get`
 
 #### Example: Load
 
-```ts
-const index_get = await client.index_get.load({ id: 'index_get_id' })
+```php
+// load() returns the bare IndexGet record (throws on error).
+$index_get = $client->IndexGet()->load(["id" => "index_get_id"]);
 ```
 
 
 ### Iprank
 
-Create an instance: `const iprank = client.iprank`
+Create an instance: `$iprank = $client->Iprank();`
 
 #### Operations
 
@@ -299,14 +305,15 @@ Create an instance: `const iprank = client.iprank`
 
 #### Example: Load
 
-```ts
-const iprank = await client.iprank.load({ id: 'iprank_id' })
+```php
+// load() returns the bare Iprank record (throws on error).
+$iprank = $client->Iprank()->load(["id" => "iprank_id"]);
 ```
 
 
 ### Json
 
-Create an instance: `const json = client.json`
+Create an instance: `$json = $client->Json();`
 
 #### Operations
 
@@ -316,14 +323,15 @@ Create an instance: `const json = client.json`
 
 #### Example: Load
 
-```ts
-const json = await client.json.load({ id: 'json_id' })
+```php
+// load() returns the bare Json record (throws on error).
+$json = $client->Json()->load(["id" => "json_id"]);
 ```
 
 
 ### Robot
 
-Create an instance: `const robot = client.robot`
+Create an instance: `$robot = $client->Robot();`
 
 #### Operations
 
@@ -333,14 +341,15 @@ Create an instance: `const robot = client.robot`
 
 #### Example: Load
 
-```ts
-const robot = await client.robot.load({ id: 'robot_id' })
+```php
+// load() returns the bare Robot record (throws on error).
+$robot = $client->Robot()->load(["id" => "robot_id"]);
 ```
 
 
 ### Simple
 
-Create an instance: `const simple = client.simple`
+Create an instance: `$simple = $client->Simple();`
 
 #### Operations
 
@@ -350,14 +359,15 @@ Create an instance: `const simple = client.simple`
 
 #### Example: Load
 
-```ts
-const simple = await client.simple.load({ id: 'simple_id' })
+```php
+// load() returns the bare Simple record (throws on error).
+$simple = $client->Simple()->load(["id" => "simple_id"]);
 ```
 
 
 ### Table
 
-Create an instance: `const table = client.table`
+Create an instance: `$table = $client->Table();`
 
 #### Operations
 
@@ -367,8 +377,9 @@ Create an instance: `const table = client.table`
 
 #### Example: Load
 
-```ts
-const table = await client.table.load({ id: 'table_id' })
+```php
+// load() returns the bare Table record (throws on error).
+$table = $client->Table()->load(["id" => "table_id"]);
 ```
 
 
@@ -443,7 +454,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$indexget = $client->indexget();
+$indexget = $client->IndexGet();
 $indexget->load(["id" => "example_id"]);
 
 // $indexget->dataGet() now returns the loaded indexget data

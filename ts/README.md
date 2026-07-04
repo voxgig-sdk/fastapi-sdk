@@ -30,11 +30,14 @@ const client = new FastapiSDK()
 
 ### 3. Load an indexget
 
-```ts
-const result = await client.indexget.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const indexget = await client.IndexGet().load({ id: 'example_id' })
+  console.log(indexget)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -52,6 +55,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -80,9 +86,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FastapiSDK.test()
 
-const result = await client.indexget.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const indexget = await client.IndexGet().load({ id: 'test01' })
+// indexget is a bare entity populated with mock response data
+console.log(indexget)
 ```
 
 You can also use the instance method:
@@ -97,7 +103,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.indexget
+const entity = client.IndexGet()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -175,8 +181,8 @@ new FastapiSDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `IndexGet(data?)` | `IndexGetEntity` | Create a IndexGet entity instance. |
-| `Iprank(data?)` | `IprankEntity` | Create a Iprank entity instance. |
+| `IndexGet(data?)` | `IndexGetEntity` | Create an IndexGet entity instance. |
+| `Iprank(data?)` | `IprankEntity` | Create an Iprank entity instance. |
 | `Json(data?)` | `JsonEntity` | Create a Json entity instance. |
 | `Robot(data?)` | `RobotEntity` | Create a Robot entity instance. |
 | `Simple(data?)` | `SimpleEntity` | Create a Simple entity instance. |
@@ -197,29 +203,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): FastapiSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -312,7 +319,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `const index_get = client.index_get`
+Create an instance: `const index_get = client.IndexGet()`
 
 #### Operations
 
@@ -323,13 +330,13 @@ Create an instance: `const index_get = client.index_get`
 #### Example: Load
 
 ```ts
-const index_get = await client.index_get.load({ id: 'index_get_id' })
+const index_get = await client.IndexGet().load({ id: 'index_get_id' })
 ```
 
 
 ### Iprank
 
-Create an instance: `const iprank = client.iprank`
+Create an instance: `const iprank = client.Iprank()`
 
 #### Operations
 
@@ -340,13 +347,13 @@ Create an instance: `const iprank = client.iprank`
 #### Example: Load
 
 ```ts
-const iprank = await client.iprank.load({ id: 'iprank_id' })
+const iprank = await client.Iprank().load({ id: 'iprank_id' })
 ```
 
 
 ### Json
 
-Create an instance: `const json = client.json`
+Create an instance: `const json = client.Json()`
 
 #### Operations
 
@@ -357,13 +364,13 @@ Create an instance: `const json = client.json`
 #### Example: Load
 
 ```ts
-const json = await client.json.load({ id: 'json_id' })
+const json = await client.Json().load({ id: 'json_id' })
 ```
 
 
 ### Robot
 
-Create an instance: `const robot = client.robot`
+Create an instance: `const robot = client.Robot()`
 
 #### Operations
 
@@ -374,13 +381,13 @@ Create an instance: `const robot = client.robot`
 #### Example: Load
 
 ```ts
-const robot = await client.robot.load({ id: 'robot_id' })
+const robot = await client.Robot().load({ id: 'robot_id' })
 ```
 
 
 ### Simple
 
-Create an instance: `const simple = client.simple`
+Create an instance: `const simple = client.Simple()`
 
 #### Operations
 
@@ -391,13 +398,13 @@ Create an instance: `const simple = client.simple`
 #### Example: Load
 
 ```ts
-const simple = await client.simple.load({ id: 'simple_id' })
+const simple = await client.Simple().load({ id: 'simple_id' })
 ```
 
 
 ### Table
 
-Create an instance: `const table = client.table`
+Create an instance: `const table = client.Table()`
 
 #### Operations
 
@@ -408,7 +415,7 @@ Create an instance: `const table = client.table`
 #### Example: Load
 
 ```ts
-const table = await client.table.load({ id: 'table_id' })
+const table = await client.Table().load({ id: 'table_id' })
 ```
 
 
@@ -479,7 +486,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const indexget = client.indexget
+const indexget = client.IndexGet()
 await indexget.load({ id: "example_id" })
 
 // indexget.data() now returns the loaded indexget data

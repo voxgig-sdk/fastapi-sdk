@@ -26,9 +26,9 @@ import { FastapiSDK } from '@voxgig-sdk/fastapi'
 
 const client = new FastapiSDK()
 
-// Load indexget data
-const indexget = await client.indexget.load({})
-console.log(indexget.data)
+// Load indexget data (returns a IndexGet)
+const indexget = await client.IndexGet().load()
+console.log(indexget)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -89,8 +89,8 @@ from fastapi_sdk import FastapiSDK
 client = FastapiSDK()
 
 
-# Load a specific indexget
-indexget = client.indexget.load({"id": "example_id"})
+# Load a specific indexget (returns the record, raises on error)
+indexget = client.IndexGet().load({"id": "example_id"})
 print(indexget)
 ```
 
@@ -103,8 +103,8 @@ require_once 'fastapi_sdk.php';
 $client = new FastapiSDK();
 
 
-// Load a specific indexget
-$indexget = $client->indexget()->load(["id" => "example_id"]);
+// Load a specific indexget (returns the bare record; throws on error)
+$indexget = $client->IndexGet()->load(["id" => "example_id"]);
 print_r($indexget);
 ```
 
@@ -128,8 +128,8 @@ require_relative "Fastapi_sdk"
 client = FastapiSDK.new
 
 
-# Load a specific indexget
-indexget = client.indexget.load({ "id" => "example_id" })
+# Load a specific indexget (returns the bare record; raises on error)
+indexget = client.IndexGet.load({ "id" => "example_id" })
 puts indexget
 ```
 
@@ -142,7 +142,7 @@ local client = sdk.new()
 
 
 -- Load a specific indexget
-local indexget, err = client:indexget():load({ id = "example_id" })
+local indexget, err = client:IndexGet():load({ id = "example_id" })
 print(indexget)
 ```
 
@@ -155,22 +155,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = FastapiSDK.test()
-const result = await client.indexget.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const indexget = await client.IndexGet().load({ id: 'test01' })
+// indexget is a bare IndexGet populated with mock data
+console.log(indexget)
 ```
 
 ### Python
 
 ```python
 client = FastapiSDK.test()
-result = client.indexget.load({"id": "test01"})
+indexget = client.IndexGet().load({"id": "test01"})
+print(indexget)
 ```
 
 ### PHP
 
 ```php
-$client = FastapiSDK::test();
-$result = $client->indexget()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = FastapiSDK::test([
+    "entity" => ["indexget" => ["test01" => ["id" => "test01"]]],
+]);
+$indexget = $client->IndexGet()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -185,15 +190,18 @@ result, err := client.IndexGet(nil).Load(
 ### Ruby
 
 ```ruby
-client = FastapiSDK.test
-result = client.indexget.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = FastapiSDK.test({
+  "entity" => { "indexget" => { "test01" => { "id" => "test01" } } },
+})
+indexget = client.IndexGet.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:indexget():load({ id = "test01" })
+local result, err = client:IndexGet():load({ id = "test01" })
 ```
 
 ## How it works
@@ -241,6 +249,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

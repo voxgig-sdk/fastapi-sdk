@@ -208,78 +208,42 @@ class FastapiSDK
   end
 
 
-  # Idiomatic facade: client.index_get.list / client.index_get.load({ "id" => ... })
-  def index_get
-    require_relative 'entity/index_get_entity'
-    @index_get ||= IndexGetEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.index_get instead.
+  # Canonical facade: client.IndexGet.list / client.IndexGet.load({ "id" => ... })
   def IndexGet(data = nil)
     require_relative 'entity/index_get_entity'
     IndexGetEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.iprank.list / client.iprank.load({ "id" => ... })
-  def iprank
-    require_relative 'entity/iprank_entity'
-    @iprank ||= IprankEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.iprank instead.
+  # Canonical facade: client.Iprank.list / client.Iprank.load({ "id" => ... })
   def Iprank(data = nil)
     require_relative 'entity/iprank_entity'
     IprankEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.json.list / client.json.load({ "id" => ... })
-  def json
-    require_relative 'entity/json_entity'
-    @json ||= JsonEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.json instead.
+  # Canonical facade: client.Json.list / client.Json.load({ "id" => ... })
   def Json(data = nil)
     require_relative 'entity/json_entity'
     JsonEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.robot.list / client.robot.load({ "id" => ... })
-  def robot
-    require_relative 'entity/robot_entity'
-    @robot ||= RobotEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.robot instead.
+  # Canonical facade: client.Robot.list / client.Robot.load({ "id" => ... })
   def Robot(data = nil)
     require_relative 'entity/robot_entity'
     RobotEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.simple.list / client.simple.load({ "id" => ... })
-  def simple
-    require_relative 'entity/simple_entity'
-    @simple ||= SimpleEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.simple instead.
+  # Canonical facade: client.Simple.list / client.Simple.load({ "id" => ... })
   def Simple(data = nil)
     require_relative 'entity/simple_entity'
     SimpleEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.table.list / client.table.load({ "id" => ... })
-  def table
-    require_relative 'entity/table_entity'
-    @table ||= TableEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.table instead.
+  # Canonical facade: client.Table.list / client.Table.load({ "id" => ... })
   def Table(data = nil)
     require_relative 'entity/table_entity'
     TableEntity.new(self, data)

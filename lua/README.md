@@ -34,9 +34,9 @@ local client = sdk.new()
 ### 3. Load an indexget
 
 ```lua
-local result, err = client:indexget():load({ id = "example_id" })
+local indexget, err = client:IndexGet():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(indexget)
 ```
 
 
@@ -82,8 +82,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:indexget():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:IndexGet():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -161,8 +161,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `IndexGet` | `(data) -> IndexGetEntity` | Create a IndexGet entity instance. |
-| `Iprank` | `(data) -> IprankEntity` | Create a Iprank entity instance. |
+| `IndexGet` | `(data) -> IndexGetEntity` | Create an IndexGet entity instance. |
+| `Iprank` | `(data) -> IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `(data) -> JsonEntity` | Create a Json entity instance. |
 | `Robot` | `(data) -> RobotEntity` | Create a Robot entity instance. |
 | `Simple` | `(data) -> SimpleEntity` | Create a Simple entity instance. |
@@ -188,17 +188,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local index_get, err = client:IndexGet():load({ id = "example_id" })
+    if err then error(err) end
+    -- index_get is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -263,7 +268,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `const index_get = client.index_get`
+Create an instance: `local index_get = client:IndexGet(nil)`
 
 #### Operations
 
@@ -273,14 +278,14 @@ Create an instance: `const index_get = client.index_get`
 
 #### Example: Load
 
-```ts
-const index_get = await client.index_get.load({ id: 'index_get_id' })
+```lua
+local index_get, err = client:IndexGet():load({ id = "index_get_id" })
 ```
 
 
 ### Iprank
 
-Create an instance: `const iprank = client.iprank`
+Create an instance: `local iprank = client:Iprank(nil)`
 
 #### Operations
 
@@ -290,14 +295,14 @@ Create an instance: `const iprank = client.iprank`
 
 #### Example: Load
 
-```ts
-const iprank = await client.iprank.load({ id: 'iprank_id' })
+```lua
+local iprank, err = client:Iprank():load({ id = "iprank_id" })
 ```
 
 
 ### Json
 
-Create an instance: `const json = client.json`
+Create an instance: `local json = client:Json(nil)`
 
 #### Operations
 
@@ -307,14 +312,14 @@ Create an instance: `const json = client.json`
 
 #### Example: Load
 
-```ts
-const json = await client.json.load({ id: 'json_id' })
+```lua
+local json, err = client:Json():load({ id = "json_id" })
 ```
 
 
 ### Robot
 
-Create an instance: `const robot = client.robot`
+Create an instance: `local robot = client:Robot(nil)`
 
 #### Operations
 
@@ -324,14 +329,14 @@ Create an instance: `const robot = client.robot`
 
 #### Example: Load
 
-```ts
-const robot = await client.robot.load({ id: 'robot_id' })
+```lua
+local robot, err = client:Robot():load({ id = "robot_id" })
 ```
 
 
 ### Simple
 
-Create an instance: `const simple = client.simple`
+Create an instance: `local simple = client:Simple(nil)`
 
 #### Operations
 
@@ -341,14 +346,14 @@ Create an instance: `const simple = client.simple`
 
 #### Example: Load
 
-```ts
-const simple = await client.simple.load({ id: 'simple_id' })
+```lua
+local simple, err = client:Simple():load({ id = "simple_id" })
 ```
 
 
 ### Table
 
-Create an instance: `const table = client.table`
+Create an instance: `local table = client:Table(nil)`
 
 #### Operations
 
@@ -358,8 +363,8 @@ Create an instance: `const table = client.table`
 
 #### Example: Load
 
-```ts
-const table = await client.table.load({ id: 'table_id' })
+```lua
+local table, err = client:Table():load({ id = "table_id" })
 ```
 
 
@@ -434,7 +439,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local indexget = client:indexget()
+local indexget = client:IndexGet()
 indexget:load({ id = "example_id" })
 
 -- indexget:data_get() now returns the loaded indexget data

@@ -220,105 +220,45 @@ class FastapiSDK:
         }
 
 
-    @property
-    def index_get(self):
-        """Idiomatic facade: client.index_get.list() / client.index_get.load({"id": ...})."""
-        from entity.index_get_entity import IndexGetEntity
-        cached = getattr(self, "_index_get", None)
-        if cached is None:
-            cached = IndexGetEntity(self, None)
-            self._index_get = cached
-        return cached
-
-    def IndexGet(self, data=None):
-        # Deprecated: use client.index_get instead.
+    def IndexGet(self, data=None) -> "IndexGetEntity":
+        """Entity factory: client.IndexGet().list({}) / client.IndexGet().load({"id": ...})."""
         from entity.index_get_entity import IndexGetEntity
         return IndexGetEntity(self, data)
 
 
-    @property
-    def iprank(self):
-        """Idiomatic facade: client.iprank.list() / client.iprank.load({"id": ...})."""
-        from entity.iprank_entity import IprankEntity
-        cached = getattr(self, "_iprank", None)
-        if cached is None:
-            cached = IprankEntity(self, None)
-            self._iprank = cached
-        return cached
-
-    def Iprank(self, data=None):
-        # Deprecated: use client.iprank instead.
+    def Iprank(self, data=None) -> "IprankEntity":
+        """Entity factory: client.Iprank().list({}) / client.Iprank().load({"id": ...})."""
         from entity.iprank_entity import IprankEntity
         return IprankEntity(self, data)
 
 
-    @property
-    def json(self):
-        """Idiomatic facade: client.json.list() / client.json.load({"id": ...})."""
-        from entity.json_entity import JsonEntity
-        cached = getattr(self, "_json", None)
-        if cached is None:
-            cached = JsonEntity(self, None)
-            self._json = cached
-        return cached
-
-    def Json(self, data=None):
-        # Deprecated: use client.json instead.
+    def Json(self, data=None) -> "JsonEntity":
+        """Entity factory: client.Json().list({}) / client.Json().load({"id": ...})."""
         from entity.json_entity import JsonEntity
         return JsonEntity(self, data)
 
 
-    @property
-    def robot(self):
-        """Idiomatic facade: client.robot.list() / client.robot.load({"id": ...})."""
-        from entity.robot_entity import RobotEntity
-        cached = getattr(self, "_robot", None)
-        if cached is None:
-            cached = RobotEntity(self, None)
-            self._robot = cached
-        return cached
-
-    def Robot(self, data=None):
-        # Deprecated: use client.robot instead.
+    def Robot(self, data=None) -> "RobotEntity":
+        """Entity factory: client.Robot().list({}) / client.Robot().load({"id": ...})."""
         from entity.robot_entity import RobotEntity
         return RobotEntity(self, data)
 
 
-    @property
-    def simple(self):
-        """Idiomatic facade: client.simple.list() / client.simple.load({"id": ...})."""
-        from entity.simple_entity import SimpleEntity
-        cached = getattr(self, "_simple", None)
-        if cached is None:
-            cached = SimpleEntity(self, None)
-            self._simple = cached
-        return cached
-
-    def Simple(self, data=None):
-        # Deprecated: use client.simple instead.
+    def Simple(self, data=None) -> "SimpleEntity":
+        """Entity factory: client.Simple().list({}) / client.Simple().load({"id": ...})."""
         from entity.simple_entity import SimpleEntity
         return SimpleEntity(self, data)
 
 
-    @property
-    def table(self):
-        """Idiomatic facade: client.table.list() / client.table.load({"id": ...})."""
-        from entity.table_entity import TableEntity
-        cached = getattr(self, "_table", None)
-        if cached is None:
-            cached = TableEntity(self, None)
-            self._table = cached
-        return cached
-
-    def Table(self, data=None):
-        # Deprecated: use client.table instead.
+    def Table(self, data=None) -> "TableEntity":
+        """Entity factory: client.Table().list({}) / client.Table().load({"id": ...})."""
         from entity.table_entity import TableEntity
         return TableEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "FastapiSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -338,3 +278,14 @@ class FastapiSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.index_get_entity import IndexGetEntity
+    from entity.iprank_entity import IprankEntity
+    from entity.json_entity import JsonEntity
+    from entity.robot_entity import RobotEntity
+    from entity.simple_entity import SimpleEntity
+    from entity.table_entity import TableEntity

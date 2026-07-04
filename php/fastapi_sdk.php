@@ -233,10 +233,10 @@ class FastapiSDK
 
     private $_index_get = null;
 
-    // Idiomatic facade: $client->index_get()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias IndexGet() (PHP method
-    // names are case-insensitive).
-    public function index_get($data = null)
+    // Canonical facade: $client->IndexGet()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->index_get()
+    // resolves here too.
+    public function IndexGet($data = null)
     {
         require_once __DIR__ . '/entity/index_get_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class FastapiSDK
 
     private $_iprank = null;
 
-    // Idiomatic facade: $client->iprank()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Iprank() (PHP method
-    // names are case-insensitive).
-    public function iprank($data = null)
+    // Canonical facade: $client->Iprank()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->iprank()
+    // resolves here too.
+    public function Iprank($data = null)
     {
         require_once __DIR__ . '/entity/iprank_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class FastapiSDK
 
     private $_json = null;
 
-    // Idiomatic facade: $client->json()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Json() (PHP method
-    // names are case-insensitive).
-    public function json($data = null)
+    // Canonical facade: $client->Json()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->json()
+    // resolves here too.
+    public function Json($data = null)
     {
         require_once __DIR__ . '/entity/json_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class FastapiSDK
 
     private $_robot = null;
 
-    // Idiomatic facade: $client->robot()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Robot() (PHP method
-    // names are case-insensitive).
-    public function robot($data = null)
+    // Canonical facade: $client->Robot()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->robot()
+    // resolves here too.
+    public function Robot($data = null)
     {
         require_once __DIR__ . '/entity/robot_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class FastapiSDK
 
     private $_simple = null;
 
-    // Idiomatic facade: $client->simple()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Simple() (PHP method
-    // names are case-insensitive).
-    public function simple($data = null)
+    // Canonical facade: $client->Simple()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->simple()
+    // resolves here too.
+    public function Simple($data = null)
     {
         require_once __DIR__ . '/entity/simple_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class FastapiSDK
 
     private $_table = null;
 
-    // Idiomatic facade: $client->table()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Table() (PHP method
-    // names are case-insensitive).
-    public function table($data = null)
+    // Canonical facade: $client->Table()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->table()
+    // resolves here too.
+    public function Table($data = null)
     {
         require_once __DIR__ . '/entity/table_entity.php';
         if ($data === null) {

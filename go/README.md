@@ -30,36 +30,30 @@ go mod edit -replace github.com/voxgig-sdk/fastapi-sdk/go=../fastapi-sdk/go
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/fastapi-sdk/go"
-    "github.com/voxgig-sdk/fastapi-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 3. Load an indexget
-
-```go
-    result, err = client.IndexGet(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single indexget — the value is the loaded record.
+    indexget, err := client.IndexGet(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(indexget)
 }
 ```
 
@@ -110,10 +104,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.IndexGet(nil).Load(
+indexget, err := client.IndexGet(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(indexget) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -190,8 +187,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `IndexGet` | `(data map[string]any) FastapiEntity` | Create a IndexGet entity instance. |
-| `Iprank` | `(data map[string]any) FastapiEntity` | Create a Iprank entity instance. |
+| `IndexGet` | `(data map[string]any) FastapiEntity` | Create an IndexGet entity instance. |
+| `Iprank` | `(data map[string]any) FastapiEntity` | Create an Iprank entity instance. |
 | `Json` | `(data map[string]any) FastapiEntity` | Create a Json entity instance. |
 | `Robot` | `(data map[string]any) FastapiEntity` | Create a Robot entity instance. |
 | `Simple` | `(data map[string]any) FastapiEntity` | Create a Simple entity instance. |
@@ -215,17 +212,24 @@ All entities implement the `FastapiEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    indexget, err := client.IndexGet(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // indexget is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -301,7 +305,11 @@ Create an instance: `index_get := client.IndexGet(nil)`
 #### Example: Load
 
 ```go
-result, err := client.IndexGet(nil).Load(map[string]any{"id": "index_get_id"}, nil)
+index_get, err := client.IndexGet(nil).Load(map[string]any{"id": "index_get_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(index_get) // the loaded record
 ```
 
 
@@ -318,7 +326,11 @@ Create an instance: `iprank := client.Iprank(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Iprank(nil).Load(map[string]any{"id": "iprank_id"}, nil)
+iprank, err := client.Iprank(nil).Load(map[string]any{"id": "iprank_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(iprank) // the loaded record
 ```
 
 
@@ -335,7 +347,11 @@ Create an instance: `json := client.Json(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Json(nil).Load(map[string]any{"id": "json_id"}, nil)
+json, err := client.Json(nil).Load(map[string]any{"id": "json_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(json) // the loaded record
 ```
 
 
@@ -352,7 +368,11 @@ Create an instance: `robot := client.Robot(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Robot(nil).Load(map[string]any{"id": "robot_id"}, nil)
+robot, err := client.Robot(nil).Load(map[string]any{"id": "robot_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(robot) // the loaded record
 ```
 
 
@@ -369,7 +389,11 @@ Create an instance: `simple := client.Simple(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Simple(nil).Load(map[string]any{"id": "simple_id"}, nil)
+simple, err := client.Simple(nil).Load(map[string]any{"id": "simple_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(simple) // the loaded record
 ```
 
 
@@ -386,7 +410,11 @@ Create an instance: `table := client.Table(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Table(nil).Load(map[string]any{"id": "table_id"}, nil)
+table, err := client.Table(nil).Load(map[string]any{"id": "table_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(table) // the loaded record
 ```
 
 

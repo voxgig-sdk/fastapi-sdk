@@ -103,7 +103,7 @@ same parameters as `direct()`.
 ## IndexGetEntity
 
 ```lua
-local index_get = client:index_get(nil)
+local index_get = client:IndexGet(nil)
 ```
 
 ### Operations
@@ -113,7 +113,7 @@ local index_get = client:index_get(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:index_get():load({ id = "index_get_id" })
+local result, err = client:IndexGet():load({ id = "index_get_id" })
 ```
 
 ### Common Methods
@@ -149,7 +149,7 @@ Return the entity name.
 ## IprankEntity
 
 ```lua
-local iprank = client:iprank(nil)
+local iprank = client:Iprank(nil)
 ```
 
 ### Operations
@@ -159,7 +159,7 @@ local iprank = client:iprank(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:iprank():load({ id = "iprank_id" })
+local result, err = client:Iprank():load({ id = "iprank_id" })
 ```
 
 ### Common Methods
@@ -195,7 +195,7 @@ Return the entity name.
 ## JsonEntity
 
 ```lua
-local json = client:json(nil)
+local json = client:Json(nil)
 ```
 
 ### Operations
@@ -205,7 +205,7 @@ local json = client:json(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:json():load({ id = "json_id" })
+local result, err = client:Json():load({ id = "json_id" })
 ```
 
 ### Common Methods
@@ -241,7 +241,7 @@ Return the entity name.
 ## RobotEntity
 
 ```lua
-local robot = client:robot(nil)
+local robot = client:Robot(nil)
 ```
 
 ### Operations
@@ -251,7 +251,7 @@ local robot = client:robot(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:robot():load({ id = "robot_id" })
+local result, err = client:Robot():load({ id = "robot_id" })
 ```
 
 ### Common Methods
@@ -287,7 +287,7 @@ Return the entity name.
 ## SimpleEntity
 
 ```lua
-local simple = client:simple(nil)
+local simple = client:Simple(nil)
 ```
 
 ### Operations
@@ -297,7 +297,7 @@ local simple = client:simple(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:simple():load({ id = "simple_id" })
+local result, err = client:Simple():load({ id = "simple_id" })
 ```
 
 ### Common Methods
@@ -333,7 +333,7 @@ Return the entity name.
 ## TableEntity
 
 ```lua
-local table = client:table(nil)
+local table = client:Table(nil)
 ```
 
 ### Operations
@@ -343,7 +343,7 @@ local table = client:table(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:table():load({ id = "table_id" })
+local result, err = client:Table():load({ id = "table_id" })
 ```
 
 ### Common Methods

@@ -33,10 +33,12 @@ client = FastapiSDK()
 
 ### 3. Load an indexget
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.indexget.load({"id": "example_id"})
-    print(result)
+    indexget = client.IndexGet().load({"id": "example_id"})
+    print(indexget)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -84,8 +86,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FastapiSDK.test()
 
-result = client.indexget.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+indexget = client.IndexGet().load({"id": "test01"})
+# indexget contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -161,8 +164,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `IndexGet` | `(data) -> IndexGetEntity` | Create a IndexGet entity instance. |
-| `Iprank` | `(data) -> IprankEntity` | Create a Iprank entity instance. |
+| `IndexGet` | `(data) -> IndexGetEntity` | Create an IndexGet entity instance. |
+| `Iprank` | `(data) -> IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `(data) -> JsonEntity` | Create a Json entity instance. |
 | `Robot` | `(data) -> RobotEntity` | Create a Robot entity instance. |
 | `Simple` | `(data) -> SimpleEntity` | Create a Simple entity instance. |
@@ -267,7 +270,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `const index_get = client.index_get`
+Create an instance: `index_get = client.IndexGet()`
 
 #### Operations
 
@@ -277,14 +280,14 @@ Create an instance: `const index_get = client.index_get`
 
 #### Example: Load
 
-```ts
-const index_get = await client.index_get.load({ id: 'index_get_id' })
+```python
+index_get = client.IndexGet().load({"id": "index_get_id"})
 ```
 
 
 ### Iprank
 
-Create an instance: `const iprank = client.iprank`
+Create an instance: `iprank = client.Iprank()`
 
 #### Operations
 
@@ -294,14 +297,14 @@ Create an instance: `const iprank = client.iprank`
 
 #### Example: Load
 
-```ts
-const iprank = await client.iprank.load({ id: 'iprank_id' })
+```python
+iprank = client.Iprank().load({"id": "iprank_id"})
 ```
 
 
 ### Json
 
-Create an instance: `const json = client.json`
+Create an instance: `json = client.Json()`
 
 #### Operations
 
@@ -311,14 +314,14 @@ Create an instance: `const json = client.json`
 
 #### Example: Load
 
-```ts
-const json = await client.json.load({ id: 'json_id' })
+```python
+json = client.Json().load({"id": "json_id"})
 ```
 
 
 ### Robot
 
-Create an instance: `const robot = client.robot`
+Create an instance: `robot = client.Robot()`
 
 #### Operations
 
@@ -328,14 +331,14 @@ Create an instance: `const robot = client.robot`
 
 #### Example: Load
 
-```ts
-const robot = await client.robot.load({ id: 'robot_id' })
+```python
+robot = client.Robot().load({"id": "robot_id"})
 ```
 
 
 ### Simple
 
-Create an instance: `const simple = client.simple`
+Create an instance: `simple = client.Simple()`
 
 #### Operations
 
@@ -345,14 +348,14 @@ Create an instance: `const simple = client.simple`
 
 #### Example: Load
 
-```ts
-const simple = await client.simple.load({ id: 'simple_id' })
+```python
+simple = client.Simple().load({"id": "simple_id"})
 ```
 
 
 ### Table
 
-Create an instance: `const table = client.table`
+Create an instance: `table = client.Table()`
 
 #### Operations
 
@@ -362,8 +365,8 @@ Create an instance: `const table = client.table`
 
 #### Example: Load
 
-```ts
-const table = await client.table.load({ id: 'table_id' })
+```python
+table = client.Table().load({"id": "table_id"})
 ```
 
 
@@ -437,7 +440,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-indexget = client.indexget
+indexget = client.IndexGet()
 indexget.load({"id": "example_id"})
 
 # indexget.data_get() now returns the loaded indexget data
