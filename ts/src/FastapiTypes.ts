@@ -8,30 +8,36 @@
 export interface IndexGet {
 }
 
-export type IndexGetLoadMatch = Partial<IndexGet>
+export interface IndexGetLoadMatch {
+}
 
 export interface Iprank {
 }
 
-export type IprankLoadMatch = Partial<Iprank>
+export interface IprankLoadMatch {
+}
 
 export interface Json {
 }
 
-export type JsonLoadMatch = Partial<Json>
+export interface JsonLoadMatch {
+}
 
 export interface Robot {
 }
 
-export type RobotLoadMatch = Partial<Robot>
+export interface RobotLoadMatch {
+}
 
 export interface Simple {
 }
 
-export type SimpleLoadMatch = Partial<Simple>
+export interface SimpleLoadMatch {
+}
 
 export interface Table {
 }
 
-export type TableLoadMatch = Partial<Table>
+export interface TableLoadMatch {
+}
 

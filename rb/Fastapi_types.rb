@@ -12,7 +12,7 @@
 class IndexGet
 end
 
-# Match filter for IndexGet#load (any subset of IndexGet fields).
+# Request payload for IndexGet#load.
 class IndexGetLoadMatch
 end
 
@@ -20,7 +20,7 @@ end
 class Iprank
 end
 
-# Match filter for Iprank#load (any subset of Iprank fields).
+# Request payload for Iprank#load.
 class IprankLoadMatch
 end
 
@@ -28,7 +28,7 @@ end
 class Json
 end
 
-# Match filter for Json#load (any subset of Json fields).
+# Request payload for Json#load.
 class JsonLoadMatch
 end
 
@@ -36,7 +36,7 @@ end
 class Robot
 end
 
-# Match filter for Robot#load (any subset of Robot fields).
+# Request payload for Robot#load.
 class RobotLoadMatch
 end
 
@@ -44,7 +44,7 @@ end
 class Simple
 end
 
-# Match filter for Simple#load (any subset of Simple fields).
+# Request payload for Simple#load.
 class SimpleLoadMatch
 end
 
@@ -52,7 +52,7 @@ end
 class Table
 end
 
-# Match filter for Table#load (any subset of Table fields).
+# Request payload for Table#load.
 class TableLoadMatch
 end
 

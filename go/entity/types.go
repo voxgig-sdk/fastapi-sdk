@@ -12,8 +12,7 @@ import "encoding/json"
 type IndexGet struct {
 }
 
-// IndexGetLoadMatch mirrors the index_get fields as an all-optional match
-// filter (Go analog of Partial<IndexGet>).
+// IndexGetLoadMatch is the typed request payload for IndexGet.LoadTyped.
 type IndexGetLoadMatch struct {
 }
 
@@ -21,8 +20,7 @@ type IndexGetLoadMatch struct {
 type Iprank struct {
 }
 
-// IprankLoadMatch mirrors the iprank fields as an all-optional match
-// filter (Go analog of Partial<Iprank>).
+// IprankLoadMatch is the typed request payload for Iprank.LoadTyped.
 type IprankLoadMatch struct {
 }
 
@@ -30,8 +28,7 @@ type IprankLoadMatch struct {
 type Json struct {
 }
 
-// JsonLoadMatch mirrors the json fields as an all-optional match
-// filter (Go analog of Partial<Json>).
+// JsonLoadMatch is the typed request payload for Json.LoadTyped.
 type JsonLoadMatch struct {
 }
 
@@ -39,8 +36,7 @@ type JsonLoadMatch struct {
 type Robot struct {
 }
 
-// RobotLoadMatch mirrors the robot fields as an all-optional match
-// filter (Go analog of Partial<Robot>).
+// RobotLoadMatch is the typed request payload for Robot.LoadTyped.
 type RobotLoadMatch struct {
 }
 
@@ -48,8 +44,7 @@ type RobotLoadMatch struct {
 type Simple struct {
 }
 
-// SimpleLoadMatch mirrors the simple fields as an all-optional match
-// filter (Go analog of Partial<Simple>).
+// SimpleLoadMatch is the typed request payload for Simple.LoadTyped.
 type SimpleLoadMatch struct {
 }
 
@@ -57,8 +52,7 @@ type SimpleLoadMatch struct {
 type Table struct {
 }
 
-// TableLoadMatch mirrors the table fields as an all-optional match
-// filter (Go analog of Partial<Table>).
+// TableLoadMatch is the typed request payload for Table.LoadTyped.
 type TableLoadMatch struct {
 }
 

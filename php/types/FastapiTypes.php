@@ -17,7 +17,7 @@ class IndexGet
 {
 }
 
-/** Match filter for IndexGet#load (any subset of IndexGet fields). */
+/** Request payload for IndexGet#load. */
 class IndexGetLoadMatch
 {
 }
@@ -27,7 +27,7 @@ class Iprank
 {
 }
 
-/** Match filter for Iprank#load (any subset of Iprank fields). */
+/** Request payload for Iprank#load. */
 class IprankLoadMatch
 {
 }
@@ -37,7 +37,7 @@ class Json
 {
 }
 
-/** Match filter for Json#load (any subset of Json fields). */
+/** Request payload for Json#load. */
 class JsonLoadMatch
 {
 }
@@ -47,7 +47,7 @@ class Robot
 {
 }
 
-/** Match filter for Robot#load (any subset of Robot fields). */
+/** Request payload for Robot#load. */
 class RobotLoadMatch
 {
 }
@@ -57,7 +57,7 @@ class Simple
 {
 }
 
-/** Match filter for Simple#load (any subset of Simple fields). */
+/** Request payload for Simple#load. */
 class SimpleLoadMatch
 {
 }
@@ -67,7 +67,7 @@ class Table
 {
 }
 
-/** Match filter for Table#load (any subset of Table fields). */
+/** Request payload for Table#load. */
 class TableLoadMatch
 {
 }

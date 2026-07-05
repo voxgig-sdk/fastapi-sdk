@@ -8,7 +8,7 @@ Complete API reference for the Fastapi Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'fastapi_sdk'
+require_relative 'Fastapi_sdk'
 
 client = FastapiSDK.new(options)
 ```
@@ -116,7 +116,7 @@ index_get = client.IndexGet
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.IndexGet.load({ "id" => "index_get_id" })
+result = client.IndexGet.load()
 ```
 
 ### Common Methods
@@ -162,7 +162,7 @@ iprank = client.Iprank
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Iprank.load({ "id" => "iprank_id" })
+result = client.Iprank.load()
 ```
 
 ### Common Methods
@@ -208,7 +208,7 @@ json = client.Json
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Json.load({ "id" => "json_id" })
+result = client.Json.load()
 ```
 
 ### Common Methods
@@ -254,7 +254,7 @@ robot = client.Robot
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Robot.load({ "id" => "robot_id" })
+result = client.Robot.load()
 ```
 
 ### Common Methods
@@ -300,7 +300,7 @@ simple = client.Simple
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Simple.load({ "id" => "simple_id" })
+result = client.Simple.load()
 ```
 
 ### Common Methods
@@ -346,7 +346,7 @@ table = client.Table
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Table.load({ "id" => "table_id" })
+result = client.Table.load()
 ```
 
 ### Common Methods

@@ -120,7 +120,7 @@ index_get := client.IndexGet(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.IndexGet(nil).Load(map[string]any{"id": "index_get_id"}, nil)
+result, err := client.IndexGet(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -160,7 +160,7 @@ iprank := client.Iprank(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Iprank(nil).Load(map[string]any{"id": "iprank_id"}, nil)
+result, err := client.Iprank(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -200,7 +200,7 @@ json := client.Json(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Json(nil).Load(map[string]any{"id": "json_id"}, nil)
+result, err := client.Json(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -240,7 +240,7 @@ robot := client.Robot(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Robot(nil).Load(map[string]any{"id": "robot_id"}, nil)
+result, err := client.Robot(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -280,7 +280,7 @@ simple := client.Simple(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Simple(nil).Load(map[string]any{"id": "simple_id"}, nil)
+result, err := client.Simple(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -320,7 +320,7 @@ table := client.Table(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Table(nil).Load(map[string]any{"id": "table_id"}, nil)
+result, err := client.Table(nil).Load(nil, nil)
 ```
 
 ### Common Methods

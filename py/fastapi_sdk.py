@@ -221,37 +221,37 @@ class FastapiSDK:
 
 
     def IndexGet(self, data=None) -> "IndexGetEntity":
-        """Entity factory: client.IndexGet().list({}) / client.IndexGet().load({"id": ...})."""
+        """Entity factory: client.IndexGet().list() / client.IndexGet().load({"id": ...})."""
         from entity.index_get_entity import IndexGetEntity
         return IndexGetEntity(self, data)
 
 
     def Iprank(self, data=None) -> "IprankEntity":
-        """Entity factory: client.Iprank().list({}) / client.Iprank().load({"id": ...})."""
+        """Entity factory: client.Iprank().list() / client.Iprank().load({"id": ...})."""
         from entity.iprank_entity import IprankEntity
         return IprankEntity(self, data)
 
 
     def Json(self, data=None) -> "JsonEntity":
-        """Entity factory: client.Json().list({}) / client.Json().load({"id": ...})."""
+        """Entity factory: client.Json().list() / client.Json().load({"id": ...})."""
         from entity.json_entity import JsonEntity
         return JsonEntity(self, data)
 
 
     def Robot(self, data=None) -> "RobotEntity":
-        """Entity factory: client.Robot().list({}) / client.Robot().load({"id": ...})."""
+        """Entity factory: client.Robot().list() / client.Robot().load({"id": ...})."""
         from entity.robot_entity import RobotEntity
         return RobotEntity(self, data)
 
 
     def Simple(self, data=None) -> "SimpleEntity":
-        """Entity factory: client.Simple().list({}) / client.Simple().load({"id": ...})."""
+        """Entity factory: client.Simple().list() / client.Simple().load({"id": ...})."""
         from entity.simple_entity import SimpleEntity
         return SimpleEntity(self, data)
 
 
     def Table(self, data=None) -> "TableEntity":
-        """Entity factory: client.Table().list({}) / client.Table().load({"id": ...})."""
+        """Entity factory: client.Table().list() / client.Table().load({"id": ...})."""
         from entity.table_entity import TableEntity
         return TableEntity(self, data)
 

@@ -4,6 +4,8 @@
 
 The PHP SDK for the Fastapi API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->IndexGet()` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -34,10 +36,41 @@ $client = new FastapiSDK();
 ```php
 try {
     // load() returns the bare IndexGet record (throws on error).
-    $indexget = $client->IndexGet()->load(["id" => "example_id"]);
+    $indexget = $client->IndexGet()->load();
     print_r($indexget);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $indexget = $client->IndexGet()->load();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -61,7 +94,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -82,16 +118,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = FastapiSDK::test([
-    "entity" => ["indexget" => ["test01" => ["id" => "test01"]]],
-]);
+$client = FastapiSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$indexget = $client->IndexGet()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$indexget = $client->IndexGet()->load();
 print_r($indexget);
 ```
 
@@ -185,10 +218,6 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -289,7 +318,7 @@ Create an instance: `$index_get = $client->IndexGet();`
 
 ```php
 // load() returns the bare IndexGet record (throws on error).
-$index_get = $client->IndexGet()->load(["id" => "index_get_id"]);
+$index_get = $client->IndexGet()->load();
 ```
 
 
@@ -307,7 +336,7 @@ Create an instance: `$iprank = $client->Iprank();`
 
 ```php
 // load() returns the bare Iprank record (throws on error).
-$iprank = $client->Iprank()->load(["id" => "iprank_id"]);
+$iprank = $client->Iprank()->load();
 ```
 
 
@@ -325,7 +354,7 @@ Create an instance: `$json = $client->Json();`
 
 ```php
 // load() returns the bare Json record (throws on error).
-$json = $client->Json()->load(["id" => "json_id"]);
+$json = $client->Json()->load();
 ```
 
 
@@ -343,7 +372,7 @@ Create an instance: `$robot = $client->Robot();`
 
 ```php
 // load() returns the bare Robot record (throws on error).
-$robot = $client->Robot()->load(["id" => "robot_id"]);
+$robot = $client->Robot()->load();
 ```
 
 
@@ -361,7 +390,7 @@ Create an instance: `$simple = $client->Simple();`
 
 ```php
 // load() returns the bare Simple record (throws on error).
-$simple = $client->Simple()->load(["id" => "simple_id"]);
+$simple = $client->Simple()->load();
 ```
 
 
@@ -379,16 +408,20 @@ Create an instance: `$table = $client->Table();`
 
 ```php
 // load() returns the bare Table record (throws on error).
-$table = $client->Table()->load(["id" => "table_id"]);
+$table = $client->Table()->load();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -405,8 +438,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -455,10 +489,10 @@ stores the returned data and match criteria internally.
 
 ```php
 $indexget = $client->IndexGet();
-$indexget->load(["id" => "example_id"]);
+$indexget->load();
 
-// $indexget->dataGet() now returns the loaded indexget data
-// $indexget->matchGet() returns the last match criteria
+// $indexget->data_get() now returns the indexget data from the last load
+// $indexget->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -113,7 +113,7 @@ local index_get = client:IndexGet(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:IndexGet():load({ id = "index_get_id" })
+local result, err = client:IndexGet():load()
 ```
 
 ### Common Methods
@@ -159,7 +159,7 @@ local iprank = client:Iprank(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Iprank():load({ id = "iprank_id" })
+local result, err = client:Iprank():load()
 ```
 
 ### Common Methods
@@ -205,7 +205,7 @@ local json = client:Json(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Json():load({ id = "json_id" })
+local result, err = client:Json():load()
 ```
 
 ### Common Methods
@@ -251,7 +251,7 @@ local robot = client:Robot(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Robot():load({ id = "robot_id" })
+local result, err = client:Robot():load()
 ```
 
 ### Common Methods
@@ -297,7 +297,7 @@ local simple = client:Simple(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Simple():load({ id = "simple_id" })
+local result, err = client:Simple():load()
 ```
 
 ### Common Methods
@@ -343,7 +343,7 @@ local table = client:Table(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Table():load({ id = "table_id" })
+local result, err = client:Table():load()
 ```
 
 ### Common Methods

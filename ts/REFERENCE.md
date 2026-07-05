@@ -179,7 +179,7 @@ const index_get = client.IndexGet()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.IndexGet().load({ id: 'index_get_id' })
+const result = await client.IndexGet().load()
 ```
 
 ### Common Methods
@@ -223,7 +223,7 @@ const iprank = client.Iprank()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Iprank().load({ id: 'iprank_id' })
+const result = await client.Iprank().load()
 ```
 
 ### Common Methods
@@ -267,7 +267,7 @@ const json = client.Json()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Json().load({ id: 'json_id' })
+const result = await client.Json().load()
 ```
 
 ### Common Methods
@@ -311,7 +311,7 @@ const robot = client.Robot()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Robot().load({ id: 'robot_id' })
+const result = await client.Robot().load()
 ```
 
 ### Common Methods
@@ -355,7 +355,7 @@ const simple = client.Simple()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Simple().load({ id: 'simple_id' })
+const result = await client.Simple().load()
 ```
 
 ### Common Methods
@@ -399,7 +399,7 @@ const table = client.Table()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Table().load({ id: 'table_id' })
+const result = await client.Table().load()
 ```
 
 ### Common Methods
