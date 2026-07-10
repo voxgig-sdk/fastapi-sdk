@@ -110,7 +110,8 @@ same parameters as `Direct()`.
 ## IndexGetEntity
 
 ```go
-index_get := client.IndexGet(nil)
+indexGet := client.IndexGet(nil)
+fmt.Println(indexGet.GetName()) // "index_get"
 ```
 
 ### Operations
@@ -121,6 +122,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.IndexGet(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -151,6 +156,7 @@ Return the entity name.
 
 ```go
 iprank := client.Iprank(nil)
+fmt.Println(iprank.GetName()) // "iprank"
 ```
 
 ### Operations
@@ -161,6 +167,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Iprank(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -191,6 +201,7 @@ Return the entity name.
 
 ```go
 json := client.Json(nil)
+fmt.Println(json.GetName()) // "json"
 ```
 
 ### Operations
@@ -201,6 +212,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Json(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -231,6 +246,7 @@ Return the entity name.
 
 ```go
 robot := client.Robot(nil)
+fmt.Println(robot.GetName()) // "robot"
 ```
 
 ### Operations
@@ -241,6 +257,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Robot(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -271,6 +291,7 @@ Return the entity name.
 
 ```go
 simple := client.Simple(nil)
+fmt.Println(simple.GetName()) // "simple"
 ```
 
 ### Operations
@@ -281,6 +302,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Simple(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -311,6 +336,7 @@ Return the entity name.
 
 ```go
 table := client.Table(nil)
+fmt.Println(table.GetName()) // "table"
 ```
 
 ### Operations
@@ -321,6 +347,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Table(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

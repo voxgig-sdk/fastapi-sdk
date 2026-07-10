@@ -50,12 +50,12 @@ import (
 func main() {
     client := sdk.New()
 
-    // Load a single indexget — the value is the loaded record.
-    indexget, err := client.IndexGet(nil).Load(nil, nil)
+    // Load a single indexGet — the value is the loaded record.
+    indexGet, err := client.IndexGet(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(indexget)
+    fmt.Println(indexGet)
 }
 ```
 
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-indexget, err := client.IndexGet(nil).Load(
+indexGet, err := client.IndexGet(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(indexget) // the returned mock data
+fmt.Println(indexGet) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -250,9 +250,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    indexget, err := client.IndexGet(nil).Load(nil, nil)
+    indexGet, err := client.IndexGet(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // indexget is the returned record
+    // indexGet is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -320,7 +320,7 @@ API path: `/table`
 
 ### IndexGet
 
-Create an instance: `index_get := client.IndexGet(nil)`
+Create an instance: `indexGet := client.IndexGet(nil)`
 
 #### Operations
 
@@ -331,11 +331,11 @@ Create an instance: `index_get := client.IndexGet(nil)`
 #### Example: Load
 
 ```go
-index_get, err := client.IndexGet(nil).Load(nil, nil)
+indexGet, err := client.IndexGet(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(index_get) // the loaded record
+fmt.Println(indexGet) // the loaded record
 ```
 
 
