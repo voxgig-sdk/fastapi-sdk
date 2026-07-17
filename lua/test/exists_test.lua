@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Fastapi SDK exists test
 
 local sdk = require("fastapi_sdk")
 
