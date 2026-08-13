@@ -62,7 +62,7 @@ describe('IprankEntity', async () => {
     // LOAD
     const iprank_ref01_ent = client.Iprank()
     const iprank_ref01_match_dt0: any = {}
-    const iprank_ref01_data_dt0 = await iprank_ref01_ent.load(iprank_ref01_match_dt0)
+    const iprank_ref01_data_dt0 = (await iprank_ref01_ent.load(iprank_ref01_match_dt0)).data()
     assert(null != iprank_ref01_data_dt0)
 
 

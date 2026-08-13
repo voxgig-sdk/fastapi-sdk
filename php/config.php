@@ -55,6 +55,7 @@ class FastapiConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/',
                   'parts' => [],
@@ -88,6 +89,7 @@ class FastapiConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stat/iprank',
                   'parts' => [
@@ -131,6 +133,7 @@ class FastapiConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/json',
                   'parts' => [
@@ -166,6 +169,7 @@ class FastapiConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/robots.txt',
                   'parts' => [
@@ -197,6 +201,7 @@ class FastapiConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/simple',
                   'parts' => [
@@ -228,6 +233,7 @@ class FastapiConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/table',
                   'parts' => [

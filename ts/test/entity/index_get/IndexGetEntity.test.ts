@@ -62,7 +62,7 @@ describe('IndexGetEntity', async () => {
     // LOAD
     const index_get_ref01_ent = client.IndexGet()
     const index_get_ref01_match_dt0: any = {}
-    const index_get_ref01_data_dt0 = await index_get_ref01_ent.load(index_get_ref01_match_dt0)
+    const index_get_ref01_data_dt0 = (await index_get_ref01_ent.load(index_get_ref01_match_dt0)).data()
     assert(null != index_get_ref01_data_dt0)
 
 

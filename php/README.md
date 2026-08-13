@@ -35,7 +35,7 @@ $client = new FastapiSDK();
 
 ```php
 try {
-    // load() returns the bare IndexGet record (throws on error).
+    // load() returns the ENTITY — call data_get() for the IndexGet record (throws on error).
     $indexget = $client->IndexGet()->load();
     print_r($indexget);
 } catch (\Throwable $err) {
@@ -51,7 +51,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $indexget = $client->IndexGet()->load();
+    $iprank = $client->Iprank()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -123,9 +123,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = FastapiSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$indexget = $client->IndexGet()->load();
-print_r($indexget);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$iprank = $client->Iprank()->load();
+print_r($iprank);
 ```
 
 ### Use a custom fetch function
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -317,7 +318,7 @@ Create an instance: `$index_get = $client->IndexGet();`
 #### Example: Load
 
 ```php
-// load() returns the bare IndexGet record (throws on error).
+// load() returns the ENTITY — call data_get() for the IndexGet record (throws on error).
 $index_get = $client->IndexGet()->load();
 ```
 
@@ -335,7 +336,7 @@ Create an instance: `$iprank = $client->Iprank();`
 #### Example: Load
 
 ```php
-// load() returns the bare Iprank record (throws on error).
+// load() returns the ENTITY — call data_get() for the Iprank record (throws on error).
 $iprank = $client->Iprank()->load();
 ```
 
@@ -353,7 +354,7 @@ Create an instance: `$json = $client->Json();`
 #### Example: Load
 
 ```php
-// load() returns the bare Json record (throws on error).
+// load() returns the ENTITY — call data_get() for the Json record (throws on error).
 $json = $client->Json()->load();
 ```
 
@@ -371,7 +372,7 @@ Create an instance: `$robot = $client->Robot();`
 #### Example: Load
 
 ```php
-// load() returns the bare Robot record (throws on error).
+// load() returns the ENTITY — call data_get() for the Robot record (throws on error).
 $robot = $client->Robot()->load();
 ```
 
@@ -389,7 +390,7 @@ Create an instance: `$simple = $client->Simple();`
 #### Example: Load
 
 ```php
-// load() returns the bare Simple record (throws on error).
+// load() returns the ENTITY — call data_get() for the Simple record (throws on error).
 $simple = $client->Simple()->load();
 ```
 
@@ -407,7 +408,7 @@ Create an instance: `$table = $client->Table();`
 #### Example: Load
 
 ```php
-// load() returns the bare Table record (throws on error).
+// load() returns the ENTITY — call data_get() for the Table record (throws on error).
 $table = $client->Table()->load();
 ```
 
@@ -488,11 +489,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$indexget = $client->IndexGet();
-$indexget->load();
+$iprank = $client->Iprank();
+$iprank->load();
 
-// $indexget->data_get() now returns the indexget data from the last load
-// $indexget->match_get() returns the last match criteria
+// $iprank->data_get() now returns the iprank data from the last load
+// $iprank->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -62,7 +62,7 @@ describe('TableEntity', async () => {
     // LOAD
     const table_ref01_ent = client.Table()
     const table_ref01_match_dt0: any = {}
-    const table_ref01_data_dt0 = await table_ref01_ent.load(table_ref01_match_dt0)
+    const table_ref01_data_dt0 = (await table_ref01_ent.load(table_ref01_match_dt0)).data()
     assert(null != table_ref01_data_dt0)
 
 

@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from fastapi_sdk.utility.voxgig_struct import voxgig_struct as vs
 from fastapi_sdk import FastapiSDK
-from core import helpers
+from fastapi_sdk.core import helpers
 from test import runner
 
 

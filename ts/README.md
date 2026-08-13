@@ -53,8 +53,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const indexget = await client.IndexGet().load()
-  console.log(indexget)
+  const iprank = await client.Iprank().load()
+  console.log(iprank)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -120,9 +120,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = FastapiSDK.test()
 
-const indexget = await client.IndexGet().load()
-// indexget is a bare entity populated with mock response data
-console.log(indexget)
+const iprank = await client.Iprank().load()
+// iprank is the entity, populated with mock response data
+// — call iprank.data() for the record itself
+console.log(iprank)
 ```
 
 You can also use the instance method:
@@ -137,7 +138,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.IndexGet()
+const entity = client.Iprank()
 
 // First call runs the operation and stores its result
 await entity.load()
@@ -515,11 +516,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const indexget = client.IndexGet()
-await indexget.load()
+const iprank = client.Iprank()
+await iprank.load()
 
-// indexget.data() now returns the indexget data from the last `load`
-// indexget.match() returns the last match criteria
+// iprank.data() now returns the iprank data from the last `load`
+// iprank.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

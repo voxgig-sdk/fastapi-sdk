@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-indexget, err := client.IndexGet(nil).Load(nil, nil)
+iprank, err := client.Iprank(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = indexget
+_ = iprank
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-indexGet, err := client.IndexGet(nil).Load(
+iprank, err := client.Iprank(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(indexGet) // the returned mock data
+fmt.Println(iprank) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -517,11 +517,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-indexget := client.IndexGet(nil)
-indexget.Load(nil, nil)
+iprank := client.Iprank(nil)
+iprank.Load(nil, nil)
 
-// indexget.Data() now returns the indexget data from the last load
-// indexget.Match() returns the last match criteria
+// iprank.Data() now returns the iprank data from the last load
+// iprank.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

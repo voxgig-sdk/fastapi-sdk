@@ -48,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local indexget, err = client:IndexGet():load()
+local iprank, err = client:Iprank():load()
 if err then error(err) end
 ```
 
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:IndexGet():load()
+local result, err = client:Iprank():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -463,11 +463,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local indexget = client:IndexGet()
-indexget:load()
+local iprank = client:Iprank()
+iprank:load()
 
--- indexget:data_get() now returns the indexget data from the last load
--- indexget:match_get() returns the last match criteria
+-- iprank:data_get() now returns the iprank data from the last load
+-- iprank:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

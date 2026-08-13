@@ -50,6 +50,7 @@ module FastapiConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/",
                   "parts" => [],
@@ -83,6 +84,7 @@ module FastapiConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/stat/iprank",
                   "parts" => [
@@ -126,6 +128,7 @@ module FastapiConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/json",
                   "parts" => [
@@ -161,6 +164,7 @@ module FastapiConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/robots.txt",
                   "parts" => [
@@ -192,6 +196,7 @@ module FastapiConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/simple",
                   "parts" => [
@@ -223,6 +228,7 @@ module FastapiConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/table",
                   "parts" => [

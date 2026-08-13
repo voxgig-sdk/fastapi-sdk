@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Fastapi SDK exists test
 
 import pytest
 from fastapi_sdk import FastapiSDK

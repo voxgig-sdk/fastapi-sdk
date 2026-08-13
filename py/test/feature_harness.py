@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import FastapiControl
-from core.error import FastapiError
-from core.result import FastapiResult
-from core.spec import FastapiSpec
+from fastapi_sdk.config import make_config
+from fastapi_sdk.features import _make_feature
+from fastapi_sdk.core.control import FastapiControl
+from fastapi_sdk.core.error import FastapiError
+from fastapi_sdk.core.result import FastapiResult
+from fastapi_sdk.core.spec import FastapiSpec
 
 
 # True when this SDK was generated with the named feature.

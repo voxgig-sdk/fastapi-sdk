@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ FastapiUtility::setRegistrar(function (FastapiUtility $u): void {
     $u->prepare_params = [FastapiPrepareParams::class, 'call'];
     $u->prepare_path = [FastapiPreparePath::class, 'call'];
     $u->prepare_query = [FastapiPrepareQuery::class, 'call'];
+    $u->graphql_body = [FastapiGraphql::class, 'body'];
+    $u->graphql_errors = [FastapiGraphql::class, 'errors'];
     $u->result_basic = [FastapiResultBasic::class, 'call'];
     $u->result_body = [FastapiResultBody::class, 'call'];
     $u->result_headers = [FastapiResultHeaders::class, 'call'];

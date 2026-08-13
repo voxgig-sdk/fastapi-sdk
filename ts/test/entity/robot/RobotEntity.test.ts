@@ -62,7 +62,7 @@ describe('RobotEntity', async () => {
     // LOAD
     const robot_ref01_ent = client.Robot()
     const robot_ref01_match_dt0: any = {}
-    const robot_ref01_data_dt0 = await robot_ref01_ent.load(robot_ref01_match_dt0)
+    const robot_ref01_data_dt0 = (await robot_ref01_ent.load(robot_ref01_match_dt0)).data()
     assert(null != robot_ref01_data_dt0)
 
 

@@ -34,7 +34,7 @@ client = FastapiSDK.new
 
 ```ruby
 begin
-  # load returns the bare IndexGet record (raises on error).
+  # load returns the ENTITY — call data_get for the IndexGet record (raises on error).
   indexget = client.IndexGet.load()
   puts indexget
 rescue => err
@@ -49,7 +49,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  indexget = client.IndexGet.load()
+  iprank = client.Iprank.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -117,9 +117,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = FastapiSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-indexget = client.IndexGet.load()
-puts indexget
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+iprank = client.Iprank.load()
+puts iprank
 ```
 
 ### Use a custom fetch function
@@ -307,7 +308,7 @@ Create an instance: `index_get = client.IndexGet`
 #### Example: Load
 
 ```ruby
-# load returns the bare IndexGet record (raises on error).
+# load returns the ENTITY — call data_get for the IndexGet record (raises on error).
 index_get = client.IndexGet.load()
 ```
 
@@ -325,7 +326,7 @@ Create an instance: `iprank = client.Iprank`
 #### Example: Load
 
 ```ruby
-# load returns the bare Iprank record (raises on error).
+# load returns the ENTITY — call data_get for the Iprank record (raises on error).
 iprank = client.Iprank.load()
 ```
 
@@ -343,7 +344,7 @@ Create an instance: `json = client.Json`
 #### Example: Load
 
 ```ruby
-# load returns the bare Json record (raises on error).
+# load returns the ENTITY — call data_get for the Json record (raises on error).
 json = client.Json.load()
 ```
 
@@ -361,7 +362,7 @@ Create an instance: `robot = client.Robot`
 #### Example: Load
 
 ```ruby
-# load returns the bare Robot record (raises on error).
+# load returns the ENTITY — call data_get for the Robot record (raises on error).
 robot = client.Robot.load()
 ```
 
@@ -379,7 +380,7 @@ Create an instance: `simple = client.Simple`
 #### Example: Load
 
 ```ruby
-# load returns the bare Simple record (raises on error).
+# load returns the ENTITY — call data_get for the Simple record (raises on error).
 simple = client.Simple.load()
 ```
 
@@ -397,7 +398,7 @@ Create an instance: `table = client.Table`
 #### Example: Load
 
 ```ruby
-# load returns the bare Table record (raises on error).
+# load returns the ENTITY — call data_get for the Table record (raises on error).
 table = client.Table.load()
 ```
 
@@ -478,11 +479,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-indexget = client.IndexGet
-indexget.load()
+iprank = client.Iprank
+iprank.load()
 
-# indexget.data_get now returns the indexget data from the last load
-# indexget.match_get returns the last match criteria
+# iprank.data_get now returns the iprank data from the last load
+# iprank.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

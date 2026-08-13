@@ -62,7 +62,7 @@ describe('SimpleEntity', async () => {
     // LOAD
     const simple_ref01_ent = client.Simple()
     const simple_ref01_match_dt0: any = {}
-    const simple_ref01_data_dt0 = await simple_ref01_ent.load(simple_ref01_match_dt0)
+    const simple_ref01_data_dt0 = (await simple_ref01_ent.load(simple_ref01_match_dt0)).data()
     assert(null != simple_ref01_data_dt0)
 
 

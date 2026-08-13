@@ -16,11 +16,11 @@
 import pytest
 
 from fastapi_sdk import FastapiSDK
-from core.error import FastapiError
-from core.result import FastapiResult
-from core.response import FastapiResponse
-from core.spec import FastapiSpec
-from feature.base_feature import FastapiBaseFeature
+from fastapi_sdk.core.error import FastapiError
+from fastapi_sdk.core.result import FastapiResult
+from fastapi_sdk.core.response import FastapiResponse
+from fastapi_sdk.core.spec import FastapiSpec
+from fastapi_sdk.feature.base_feature import FastapiBaseFeature
 
 
 def _client():

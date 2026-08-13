@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ FastapiUtility.registrar = ->(u) {
   u.prepare_params = FastapiUtilities::PrepareParams
   u.prepare_path = FastapiUtilities::PreparePath
   u.prepare_query = FastapiUtilities::PrepareQuery
+  u.graphql_body = FastapiUtilities::GraphqlBody
+  u.graphql_errors = FastapiUtilities::GraphqlErrors
   u.result_basic = FastapiUtilities::ResultBasic
   u.result_body = FastapiUtilities::ResultBody
   u.result_headers = FastapiUtilities::ResultHeaders
