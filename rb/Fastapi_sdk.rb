@@ -28,7 +28,7 @@ class FastapiSDK
     utility = FastapiUtility.new
     @_utility = utility
 
-    config = FastapiConfig.make_config
+    config = FastapiConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

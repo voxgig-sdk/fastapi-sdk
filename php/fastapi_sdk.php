@@ -40,7 +40,7 @@ class FastapiSDK
         $utility = new FastapiUtility();
         $this->_utility = $utility;
 
-        $config = FastapiConfig::make_config();
+        $config = FastapiConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,
