@@ -19,6 +19,9 @@ module FastapiConfig
     {
       "main" => {
         "name" => "Fastapi",
+        "slug" => "fastapi",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {

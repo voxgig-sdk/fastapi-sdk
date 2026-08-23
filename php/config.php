@@ -33,6 +33,9 @@ class FastapiConfig
         return [
             "main" => [
                 "name" => "Fastapi",
+                "slug" => "fastapi",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
