@@ -28,6 +28,7 @@ module FastapiConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
