@@ -9,6 +9,7 @@
 ---@class IndexGet
 
 ---@class IndexGetLoadMatch
+---@field ip? string
 
 ---@class Iprank
 
@@ -17,6 +18,7 @@
 ---@class Json
 
 ---@class JsonLoadMatch
+---@field ip? string
 
 ---@class Robot
 

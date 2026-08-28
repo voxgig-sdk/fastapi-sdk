@@ -9,6 +9,7 @@ export interface IndexGet {
 }
 
 export interface IndexGetLoadMatch {
+  ip?: string
 }
 
 export interface Iprank {
@@ -21,6 +22,7 @@ export interface Json {
 }
 
 export interface JsonLoadMatch {
+  ip?: string
 }
 
 export interface Robot {

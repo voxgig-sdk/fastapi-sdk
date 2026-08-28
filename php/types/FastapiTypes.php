@@ -20,6 +20,7 @@ class IndexGet
 /** Request payload for IndexGet#load. */
 class IndexGetLoadMatch
 {
+    public ?string $ip = null;
 }
 
 /** Iprank entity data model. */
@@ -40,6 +41,7 @@ class Json
 /** Request payload for Json#load. */
 class JsonLoadMatch
 {
+    public ?string $ip = null;
 }
 
 /** Robot entity data model. */

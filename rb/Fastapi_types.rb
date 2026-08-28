@@ -13,8 +13,13 @@ class IndexGet
 end
 
 # Request payload for IndexGet#load.
-class IndexGetLoadMatch
-end
+#
+# @!attribute [rw] ip
+#   @return [String, nil]
+IndexGetLoadMatch = Struct.new(
+  :ip,
+  keyword_init: true
+)
 
 # Iprank entity data model.
 class Iprank
@@ -29,8 +34,13 @@ class Json
 end
 
 # Request payload for Json#load.
-class JsonLoadMatch
-end
+#
+# @!attribute [rw] ip
+#   @return [String, nil]
+JsonLoadMatch = Struct.new(
+  :ip,
+  keyword_init: true
+)
 
 # Robot entity data model.
 class Robot

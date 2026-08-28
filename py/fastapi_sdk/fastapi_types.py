@@ -20,8 +20,8 @@ class IndexGet(TypedDict):
     pass
 
 
-class IndexGetLoadMatch(TypedDict):
-    pass
+class IndexGetLoadMatch(TypedDict, total=False):
+    ip: str
 
 
 class Iprank(TypedDict):
@@ -36,8 +36,8 @@ class Json(TypedDict):
     pass
 
 
-class JsonLoadMatch(TypedDict):
-    pass
+class JsonLoadMatch(TypedDict, total=False):
+    ip: str
 
 
 class Robot(TypedDict):

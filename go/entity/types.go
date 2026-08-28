@@ -18,6 +18,7 @@ type IndexGet struct {
 
 // IndexGetLoadMatch is the typed request payload for IndexGet.LoadTyped.
 type IndexGetLoadMatch struct {
+	Ip *string `json:"ip,omitempty"`
 }
 
 // Iprank is the typed data model for the iprank entity.
@@ -34,6 +35,7 @@ type Json struct {
 
 // JsonLoadMatch is the typed request payload for Json.LoadTyped.
 type JsonLoadMatch struct {
+	Ip *string `json:"ip,omitempty"`
 }
 
 // Robot is the typed data model for the robot entity.
