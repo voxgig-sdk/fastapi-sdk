@@ -1,3 +1,4 @@
 /dist/
 /fastapi-cli
 /go-cli
+.jostraca/

@@ -68,7 +68,7 @@ module FastapiConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/",
-                  "parts" => [],
+                  "segments" => [],
                   "select" => {
                     "exist" => [
                       "ip",
@@ -78,6 +78,7 @@ module FastapiConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [],
                 },
               ],
             },
@@ -99,15 +100,23 @@ module FastapiConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/stat/iprank",
-                  "parts" => [
-                    "stat",
-                    "iprank",
+                  "segments" => [
+                    {
+                      "lit" => "stat",
+                    },
+                    {
+                      "lit" => "iprank",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "stat",
+                    "iprank",
+                  ],
                 },
               ],
             },
@@ -138,8 +147,10 @@ module FastapiConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/json",
-                  "parts" => [
-                    "json",
+                  "segments" => [
+                    {
+                      "lit" => "json",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -150,6 +161,9 @@ module FastapiConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "json",
+                  ],
                 },
               ],
             },
@@ -171,14 +185,19 @@ module FastapiConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/robots.txt",
-                  "parts" => [
-                    "robots.txt",
+                  "segments" => [
+                    {
+                      "lit" => "robots.txt",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "robots.txt",
+                  ],
                 },
               ],
             },
@@ -200,14 +219,19 @@ module FastapiConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/simple",
-                  "parts" => [
-                    "simple",
+                  "segments" => [
+                    {
+                      "lit" => "simple",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "simple",
+                  ],
                 },
               ],
             },
@@ -229,14 +253,19 @@ module FastapiConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/table",
-                  "parts" => [
-                    "table",
+                  "segments" => [
+                    {
+                      "lit" => "table",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "table",
+                  ],
                 },
               ],
             },

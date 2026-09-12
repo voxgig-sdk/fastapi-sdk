@@ -12,8 +12,10 @@ main: kit: entity: robot: {
         {
           method: "GET"
           orig: "/robots.txt"
-          parts: [
-            "robots.txt"
+          segments: [
+            {
+              lit: "robots.txt"
+            }
           ]
           transform: {
             req: "`reqdata`"

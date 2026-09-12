@@ -12,9 +12,13 @@ main: kit: entity: iprank: {
         {
           method: "GET"
           orig: "/stat/iprank"
-          parts: [
-            "stat"
-            "iprank"
+          segments: [
+            {
+              lit: "stat"
+            }
+            {
+              lit: "iprank"
+            }
           ]
           transform: {
             req: "`reqdata`"

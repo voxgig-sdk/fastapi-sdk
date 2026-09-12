@@ -12,8 +12,10 @@ main: kit: entity: simple: {
         {
           method: "GET"
           orig: "/simple"
-          parts: [
-            "simple"
+          segments: [
+            {
+              lit: "simple"
+            }
           ]
           transform: {
             req: "`reqdata`"

@@ -12,8 +12,10 @@ main: kit: entity: table: {
         {
           method: "GET"
           orig: "/table"
-          parts: [
-            "table"
+          segments: [
+            {
+              lit: "table"
+            }
           ]
           transform: {
             req: "`reqdata`"
