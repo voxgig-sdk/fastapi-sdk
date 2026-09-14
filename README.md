@@ -103,7 +103,7 @@ local result, err = client:Iprank():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
+| TypeScript | `@voxgig-sdk/fastapi-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
 | Python | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
 | PHP | `voxgig-sdk/fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/fastapi-sdk/go` | `go get github.com/voxgig-sdk/fastapi-sdk/go@latest` |
@@ -117,7 +117,7 @@ local result, err = client:Iprank():load()
 ### TypeScript
 
 ```ts
-import { FastapiSDK } from '@voxgig-sdk/fastapi'
+import { FastapiSDK } from '@voxgig-sdk/fastapi-sdk'
 
 const client = new FastapiSDK()
 

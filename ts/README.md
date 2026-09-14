@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { FastapiSDK } from '@voxgig-sdk/fastapi'
+import { FastapiSDK } from '@voxgig-sdk/fastapi-sdk'
 
 const client = new FastapiSDK()
 ```
@@ -529,7 +529,7 @@ fastapi/
 Import the SDK from the package root:
 
 ```ts
-import { FastapiSDK } from '@voxgig-sdk/fastapi'
+import { FastapiSDK } from '@voxgig-sdk/fastapi-sdk'
 ```
 
 ### Entity state
