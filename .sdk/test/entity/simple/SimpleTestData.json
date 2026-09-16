@@ -16,5 +16,26 @@
     "simple": {
       "simple_ref01": {}
     }
+  },
+  "requests": {
+    "GET /simple": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "simple_simple_get",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

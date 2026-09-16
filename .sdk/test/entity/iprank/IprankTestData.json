@@ -16,5 +16,26 @@
     "iprank": {
       "iprank_ref01": {}
     }
+  },
+  "requests": {
+    "GET /stat/iprank": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "iprank_stat_iprank_get",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

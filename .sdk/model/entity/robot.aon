@@ -10,6 +10,12 @@ main: kit: entity: robot: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /robots.txt"
+            json: "{\"operationId\":\"robotstxt_robots_txt_get\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{}}},\"description\":\"Successful Response\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/robots.txt"
           segments: [

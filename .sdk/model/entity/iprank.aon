@@ -10,6 +10,12 @@ main: kit: entity: iprank: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /stat/iprank"
+            json: "{\"operationId\":\"iprank_stat_iprank_get\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{}}},\"description\":\"Successful Response\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/stat/iprank"
           segments: [

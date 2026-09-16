@@ -10,6 +10,12 @@ main: kit: entity: table: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /table"
+            json: "{\"operationId\":\"rich_table_get\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{}}},\"description\":\"Successful Response\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/table"
           segments: [
