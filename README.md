@@ -103,12 +103,12 @@ local result, err = client:Iprank():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/fastapi-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
-| Python | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
-| PHP | `voxgig-sdk/fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
+| TypeScript | `@voxgig-sdk/fastapi-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/tags) |
+| Python | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/tags) |
+| PHP | `voxgig-sdk/fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/fastapi-sdk/go` | `go get github.com/voxgig-sdk/fastapi-sdk/go@latest` |
-| Ruby | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
-| Lua | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/releases) |
+| Ruby | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/tags) |
+| Lua | `voxgig-sdk-fastapi` | publish pending — [install from git tag](https://github.com/voxgig-sdk/fastapi-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/fastapi-sdk/go-cli` | `go install github.com/voxgig-sdk/fastapi-sdk/go-cli/cmd/fastapi@latest` |
 | Go MCP server | `github.com/voxgig-sdk/fastapi-sdk/go-mcp` | `go get github.com/voxgig-sdk/fastapi-sdk/go-mcp@latest` |
 

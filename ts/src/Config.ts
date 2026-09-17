@@ -127,24 +127,24 @@ class Config {
 
     entity: {
       
-      index_get: {
-      },
-
-      iprank: {
-      },
-
-      json: {
-      },
-
-      robot: {
-      },
-
-      simple: {
-      },
-
-      table: {
-      },
-
+        index_get: {
+        },
+  
+        iprank: {
+        },
+  
+        json: {
+        },
+  
+        robot: {
+        },
+  
+        simple: {
+        },
+  
+        table: {
+        },
+  
     }
   }
 
