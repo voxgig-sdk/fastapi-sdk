@@ -20,22 +20,8 @@
   "requests": {
     "GET /robots.txt": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "robotstxt_robots_txt_get",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

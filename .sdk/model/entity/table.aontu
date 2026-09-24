@@ -1,0 +1,39 @@
+# Entity: table
+
+main: kit: entity: table: {
+
+  alias: field: {}
+
+  name: "table"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /table"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/table"
+          s: [
+            {
+              lit: "table"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

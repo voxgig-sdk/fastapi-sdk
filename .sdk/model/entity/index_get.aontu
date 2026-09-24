@@ -1,0 +1,50 @@
+# Entity: index_get
+
+main: kit: entity: index_get: {
+
+  alias: field: {}
+
+  name: "index_get"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "ip"
+                or: "ip"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/"
+          q: {
+            exist: [
+              "ip"
+            ]
+          }
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

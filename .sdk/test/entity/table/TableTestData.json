@@ -20,22 +20,8 @@
   "requests": {
     "GET /table": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "rich_table_get",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            },
-            "description": "Successful Response"
-          }
-        },
-        "securitySource": "unspecified"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

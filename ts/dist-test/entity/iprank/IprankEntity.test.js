@@ -44,10 +44,6 @@ const live_runner_1 = require("../../live-runner");
 const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
-// AFTER the imports on purpose: TypeScript hoists `import` above any
-// statement in the emitted CommonJS, so a loader placed above them would
-// run only after every imported module had already been evaluated - and
-// anything reading process.env at module scope would miss these values.
 (0, utility_1.loadEnvLocal)(__dirname + '/../../../.env.local');
 (0, node_test_1.describe)('IprankEntity', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
@@ -66,7 +62,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [], "name": "iprank", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": {}, "contract": { "id": "GET /stat/iprank", "json": "{\"operationId\":\"iprank_stat_iprank_get\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{}}},\"description\":\"Successful Response\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/stat/iprank", "segments": [{ "lit": "stat" }, { "lit": "iprank" }], "select": {}, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "iprank", "name__orig": "iprank", "Name": "Iprank", "name_": "iprank", "name-": "iprank", "NAME": "IPRANK", "index$": 1 }, { "active": true, "entity": "iprank", "key$": "BasicIprankFlow", "kind": "basic", "name": "BasicIprankFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "iprank_ref01", "srcdatavar": "iprank_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-iprank_ref01" } }], "index$": 0 }] }, 'Iprank');
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "iprank", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /stat/iprank", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/stat/iprank", "q": {}, "r": {}, "s": [{ "lit": "stat" }, { "lit": "iprank" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "iprank", "name__orig": "iprank", "Name": "Iprank", "name_": "iprank", "name-": "iprank", "NAME": "IPRANK", "index$": 1 }, { "active": true, "entity": "iprank", "key$": "BasicIprankFlow", "kind": "basic", "name": "BasicIprankFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "iprank_ref01", "srcdatavar": "iprank_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-iprank_ref01" } }], "index$": 0 }] }, 'Iprank', { "GET /stat/iprank": { "protocol": "http", "operationId": "iprank_stat_iprank_get", "responses": { "200": { "description": "Successful Response", "content": { "application/json": { "schema": {} } } } }, "parameters": [], "securitySource": "unspecified" } });
         }
         const client = setup.client;
         const struct = setup.struct;

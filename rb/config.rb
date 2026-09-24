@@ -109,30 +109,31 @@ module FastapiConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "ip",
-                        "orig" => "ip",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/",
                   "segments" => [],
+                  "parts" => [],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "ip",
+                        "orig" => "ip",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "ip",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [],
                 },
               ],
             },
@@ -150,7 +151,6 @@ module FastapiConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/stat/iprank",
@@ -162,15 +162,17 @@ module FastapiConfig
                       "lit" => "iprank",
                     },
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "stat",
                     "iprank",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -188,16 +190,6 @@ module FastapiConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "ip",
-                        "orig" => "ip",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/json",
@@ -206,18 +198,29 @@ module FastapiConfig
                       "lit" => "json",
                     },
                   ],
+                  "parts" => [
+                    "json",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "ip",
+                        "orig" => "ip",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "ip",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "json",
-                  ],
                 },
               ],
             },
@@ -235,7 +238,6 @@ module FastapiConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/robots.txt",
@@ -244,14 +246,16 @@ module FastapiConfig
                       "lit" => "robots.txt",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "robots.txt",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "robots.txt",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -269,7 +273,6 @@ module FastapiConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/simple",
@@ -278,14 +281,16 @@ module FastapiConfig
                       "lit" => "simple",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "simple",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "simple",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -303,7 +308,6 @@ module FastapiConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/table",
@@ -312,14 +316,16 @@ module FastapiConfig
                       "lit" => "table",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "table",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "table",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },

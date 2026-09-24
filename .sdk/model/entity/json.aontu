@@ -1,0 +1,55 @@
+# Entity: json
+
+main: kit: entity: json: {
+
+  alias: field: {}
+
+  name: "json"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "ip"
+                or: "ip"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/json"
+          q: {
+            exist: [
+              "ip"
+            ]
+          }
+          s: [
+            {
+              lit: "json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

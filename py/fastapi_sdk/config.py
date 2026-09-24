@@ -126,30 +126,31 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "ip",
-                      "orig": "ip",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/",
                 "segments": [],
+                "parts": [],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "ip",
+                      "orig": "ip",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "ip",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [],
               },
             ],
           },
@@ -167,7 +168,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/stat/iprank",
@@ -179,15 +179,17 @@ def make_config():
                     "lit": "iprank",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "stat",
                   "iprank",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -205,16 +207,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "ip",
-                      "orig": "ip",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/json",
@@ -223,18 +215,29 @@ def make_config():
                     "lit": "json",
                   },
                 ],
+                "parts": [
+                  "json",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "ip",
+                      "orig": "ip",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "ip",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "json",
-                ],
               },
             ],
           },
@@ -252,7 +255,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/robots.txt",
@@ -261,14 +263,16 @@ def make_config():
                     "lit": "robots.txt",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "robots.txt",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "robots.txt",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -286,7 +290,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/simple",
@@ -295,14 +298,16 @@ def make_config():
                     "lit": "simple",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "simple",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "simple",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -320,7 +325,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/table",
@@ -329,14 +333,16 @@ def make_config():
                     "lit": "table",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "table",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "table",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },

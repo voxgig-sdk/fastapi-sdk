@@ -1,0 +1,42 @@
+# Entity: iprank
+
+main: kit: entity: iprank: {
+
+  alias: field: {}
+
+  name: "iprank"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /stat/iprank"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/stat/iprank"
+          s: [
+            {
+              lit: "stat"
+            }
+            {
+              lit: "iprank"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

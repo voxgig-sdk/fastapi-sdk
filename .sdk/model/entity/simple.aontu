@@ -1,0 +1,39 @@
+# Entity: simple
+
+main: kit: entity: simple: {
+
+  alias: field: {}
+
+  name: "simple"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /simple"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/simple"
+          s: [
+            {
+              lit: "simple"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

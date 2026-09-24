@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -159,30 +152,31 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "ip",
-                    "orig": "ip",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/",
               "segments": [],
-              "select": {
-                "exist": [
-                  "ip"
-                ]
-              },
+              "parts": [],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": []
+              "args": {
+                "query": [
+                  {
+                    "name": "ip",
+                    "orig": "ip",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "ip"
+                ]
+              }
             }
           ]
         }
@@ -200,7 +194,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/stat/iprank",
@@ -212,15 +205,17 @@ class Config {
                   "lit": "iprank"
                 }
               ],
-              "select": {},
+              "parts": [
+                "stat",
+                "iprank"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "stat",
-                "iprank"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -238,16 +233,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "ip",
-                    "orig": "ip",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/json",
@@ -256,18 +241,29 @@ class Config {
                   "lit": "json"
                 }
               ],
-              "select": {
-                "exist": [
-                  "ip"
-                ]
-              },
+              "parts": [
+                "json"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "json"
-              ]
+              "args": {
+                "query": [
+                  {
+                    "name": "ip",
+                    "orig": "ip",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "ip"
+                ]
+              }
             }
           ]
         }
@@ -285,7 +281,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/robots.txt",
@@ -294,14 +289,16 @@ class Config {
                   "lit": "robots.txt"
                 }
               ],
-              "select": {},
+              "parts": [
+                "robots.txt"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "robots.txt"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -319,7 +316,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/simple",
@@ -328,14 +324,16 @@ class Config {
                   "lit": "simple"
                 }
               ],
-              "select": {},
+              "parts": [
+                "simple"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "simple"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -353,7 +351,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/table",
@@ -362,14 +359,16 @@ class Config {
                   "lit": "table"
                 }
               ],
-              "select": {},
+              "parts": [
+                "table"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "table"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }

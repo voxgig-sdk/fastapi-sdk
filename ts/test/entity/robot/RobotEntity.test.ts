@@ -25,10 +25,6 @@ import {
 } from '../../utility'
 
 
-// AFTER the imports on purpose: TypeScript hoists `import` above any
-// statement in the emitted CommonJS, so a loader placed above them would
-// run only after every imported module had already been evaluated - and
-// anything reading process.env at module scope would miss these values.
 loadEnvLocal(__dirname + '/../../../.env.local')
 
 
@@ -55,7 +51,7 @@ describe('RobotEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[],"name":"robot","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{},"contract":{"id":"GET /robots.txt","json":"{\"operationId\":\"robotstxt_robots_txt_get\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{}}},\"description\":\"Successful Response\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/robots.txt","segments":[{"lit":"robots.txt"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"robot","name__orig":"robot","Name":"Robot","name_":"robot","name-":"robot","NAME":"ROBOT","index$":3}, {"active":true,"entity":"robot","key$":"BasicRobotFlow","kind":"basic","name":"BasicRobotFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"robot_ref01","srcdatavar":"robot_ref01_data","suffix":"_dt0"},"match":{},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-robot_ref01"}}],"index$":0}]}, 'Robot')
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"robot","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /robots.txt","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/robots.txt","q":{},"r":{},"s":[{"lit":"robots.txt"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"robot","name__orig":"robot","Name":"Robot","name_":"robot","name-":"robot","NAME":"ROBOT","index$":3}, {"active":true,"entity":"robot","key$":"BasicRobotFlow","kind":"basic","name":"BasicRobotFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"robot_ref01","srcdatavar":"robot_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-robot_ref01"}}],"index$":0}]}, 'Robot', {"GET /robots.txt":{"protocol":"http","operationId":"robotstxt_robots_txt_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}},"parameters":[],"securitySource":"unspecified"}})
     }
     const client = setup.client
     const struct = setup.struct

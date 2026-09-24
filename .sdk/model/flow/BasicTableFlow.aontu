@@ -1,0 +1,28 @@
+# BasicTableFlow
+
+main: kit: flow: BasicTableFlow:
+{
+  entity: "table",
+  kind: "basic",
+  name: "BasicTableFlow",
+  step: [
+    {
+      i: {
+        ref: "table_ref01",
+        srcdatavar: "table_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-table_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTableFlow"
+}
