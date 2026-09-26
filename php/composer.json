@@ -1,5 +1,5 @@
 {
-  "name": "voxgig-sdk/fastapi",
+  "name": "voxgig-sdk/fastapi-sdk",
   "description": "Unofficial generated PHP SDK for the Fast public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
   "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "fastapi"],
