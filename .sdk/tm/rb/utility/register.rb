@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 FastapiUtility.registrar = ->(u) {
   u.clean = FastapiUtilities::Clean
+  u.clean_add = FastapiUtilities::CleanAdd
+  u.clean_explain = FastapiUtilities::CleanExplain
   u.done = FastapiUtilities::Done
   u.make_error = FastapiUtilities::MakeError
   u.feature_add = FastapiUtilities::FeatureAdd

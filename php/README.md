@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/fastapi-sdk/releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/fastapi-sdk
+composer config repositories.fastapi-sdk path ./fastapi-sdk/php
+composer require voxgig-sdk/fastapi-sdk:@dev
+```
 
 
 ## Tutorial: your first API call

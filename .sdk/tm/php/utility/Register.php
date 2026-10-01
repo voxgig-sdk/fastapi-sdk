@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 FastapiUtility::setRegistrar(function (FastapiUtility $u): void {
     $u->clean = [FastapiClean::class, 'call'];
+    $u->clean_add = [FastapiClean::class, 'add'];
+    $u->clean_explain = [FastapiDone::class, 'clean_explain'];
     $u->done = [FastapiDone::class, 'call'];
     $u->make_error = [FastapiMakeError::class, 'call'];
     $u->feature_add = [FastapiFeatureAdd::class, 'call'];
