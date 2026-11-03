@@ -4,7 +4,7 @@
 
 The PHP SDK for the Fastapi API — an entity-oriented client using PHP conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->IndexGet()` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Iprank()` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fastapi-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -36,13 +36,13 @@ require_once 'fastapi_sdk.php';
 $client = new FastapiSDK();
 ```
 
-### 3. Load an indexget
+### 3. Load an iprank
 
 ```php
 try {
-    // load() returns the ENTITY — call data_get() for the IndexGet record (throws on error).
-    $indexget = $client->IndexGet()->load();
-    print_r($indexget->data_get());
+    // load() returns the ENTITY — call data_get() for the Iprank record (throws on error).
+    $iprank = $client->Iprank()->load();
+    print_r($iprank->data_get());
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -210,12 +210,8 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `IndexGet` | `($data): IndexGetEntity` | Create an IndexGet entity instance. |
 | `Iprank` | `($data): IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `($data): JsonEntity` | Create a Json entity instance. |
-| `Robot` | `($data): RobotEntity` | Create a Robot entity instance. |
-| `Simple` | `($data): SimpleEntity` | Create a Simple entity instance. |
-| `Table` | `($data): TableEntity` | Create a Table entity instance. |
 
 ### Entity interface
 
@@ -223,7 +219,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -233,9 +229,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -250,15 +246,6 @@ you branch on via `$result["ok"]`:
 On error, `ok` is `false` and `$err` contains the error value.
 
 ### Entities
-
-#### IndexGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### Iprank
 
@@ -278,54 +265,9 @@ Operations: Load.
 
 API path: `/json`
 
-#### Robot
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/robots.txt`
-
-#### Simple
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/simple`
-
-#### Table
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/table`
-
 
 
 ## Entities
-
-
-### IndexGet
-
-Create an instance: `$index_get = $client->IndexGet();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```php
-// load() returns the ENTITY — call data_get() for the IndexGet record (throws on error).
-$index_get = $client->IndexGet()->load();
-```
 
 
 ### Iprank
@@ -361,60 +303,6 @@ Create an instance: `$json = $client->Json();`
 ```php
 // load() returns the ENTITY — call data_get() for the Json record (throws on error).
 $json = $client->Json()->load();
-```
-
-
-### Robot
-
-Create an instance: `$robot = $client->Robot();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```php
-// load() returns the ENTITY — call data_get() for the Robot record (throws on error).
-$robot = $client->Robot()->load();
-```
-
-
-### Simple
-
-Create an instance: `$simple = $client->Simple();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```php
-// load() returns the ENTITY — call data_get() for the Simple record (throws on error).
-$simple = $client->Simple()->load();
-```
-
-
-### Table
-
-Create an instance: `$table = $client->Table();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```php
-// load() returns the ENTITY — call data_get() for the Table record (throws on error).
-$table = $client->Table()->load();
 ```
 
 ## Features

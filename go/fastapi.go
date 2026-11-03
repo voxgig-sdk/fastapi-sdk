@@ -13,7 +13,12 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type FastapiEntity = core.FastapiEntity
+type FastapiEntityBase = core.FastapiEntityBase
+
+// Deprecated: use FastapiEntityBase.
+type FastapiEntity = core.FastapiEntityBase
+
+type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
 type Result = core.Result
@@ -41,23 +46,11 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewIndexGetEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntity {
-		return entity.NewIndexGetEntity(client, entopts)
-	}
-	core.NewIprankEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntity {
+	core.NewIprankEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntityBase {
 		return entity.NewIprankEntity(client, entopts)
 	}
-	core.NewJsonEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntity {
+	core.NewJsonEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntityBase {
 		return entity.NewJsonEntity(client, entopts)
-	}
-	core.NewRobotEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntity {
-		return entity.NewRobotEntity(client, entopts)
-	}
-	core.NewSimpleEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntity {
-		return entity.NewSimpleEntity(client, entopts)
-	}
-	core.NewTableEntityFunc = func(client *core.FastapiSDK, entopts map[string]any) core.FastapiEntity {
-		return entity.NewTableEntity(client, entopts)
 	}
 }
 

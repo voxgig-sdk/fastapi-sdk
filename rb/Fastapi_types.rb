@@ -8,19 +8,6 @@
 # @voxgig/apidef VALID_CANON). Ruby types are unenforced; these YARD
 # annotations document the shapes. Do not edit by hand.
 
-# IndexGet entity data model.
-class IndexGet
-end
-
-# Request payload for IndexGet#load.
-#
-# @!attribute [rw] ip
-#   @return [String, nil]
-IndexGetLoadMatch = Struct.new(
-  :ip,
-  keyword_init: true
-)
-
 # Iprank entity data model.
 class Iprank
 end
@@ -41,28 +28,4 @@ JsonLoadMatch = Struct.new(
   :ip,
   keyword_init: true
 )
-
-# Robot entity data model.
-class Robot
-end
-
-# Request payload for Robot#load.
-class RobotLoadMatch
-end
-
-# Simple entity data model.
-class Simple
-end
-
-# Request payload for Simple#load.
-class SimpleLoadMatch
-end
-
-# Table entity data model.
-class Table
-end
-
-# Request payload for Table#load.
-class TableLoadMatch
-end
 

@@ -75,20 +75,12 @@ func runOp(client *sdk.FastapiSDK, op string, query *eng.Value, entityAtom eng.V
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.FastapiSDK, name string) (sdk.FastapiEntity, error) {
+func entityFor(client *sdk.FastapiSDK, name string) (sdk.FastapiEntityBase, error) {
 	switch strings.ToLower(name) {
-	case "index_get":
-		return client.IndexGet(nil), nil
 	case "iprank":
 		return client.Iprank(nil), nil
 	case "json":
 		return client.Json(nil), nil
-	case "robot":
-		return client.Robot(nil), nil
-	case "simple":
-		return client.Simple(nil), nil
-	case "table":
-		return client.Table(nil), nil
 
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)

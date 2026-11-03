@@ -6,17 +6,11 @@ The FastAPI API.
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 6 entities and 6 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 2 entities and 2 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
 ## What the API provides
-
-### IndexGet
-
-Results: Successful Response.
-
-SDK operations: `load`.
 
 ### Iprank
 
@@ -30,36 +24,14 @@ Results: Successful Response.
 
 SDK operations: `load`.
 
-### Robot
-
-Results: Successful Response.
-
-SDK operations: `load`.
-
-### Simple
-
-Results: Successful Response.
-
-SDK operations: `load`.
-
-### Table
-
-Results: Successful Response.
-
-SDK operations: `load`.
-
 ### Route map
 
 Use this map to locate a capability. Consult the entity reference before supplying request data; routes for the same operation can require different fields.
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| IndexGet | `load` | `GET /` | See reference |
 | Iprank | `load` | `GET /stat/iprank` | See reference |
 | Json | `load` | `GET /json` | See reference |
-| Robot | `load` | `GET /robots.txt` | See reference |
-| Simple | `load` | `GET /simple` | See reference |
-| Table | `load` | `GET /table` | See reference |
 
 ## Connect to the API
 
@@ -108,7 +80,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
 - `fastapi_list`: List records for an entity. No active entity supports this operation.
-- `fastapi_load`: Load one record for an entity. Supported entities: `index_get`, `iprank`, `json`, `robot`, `simple`, `table`.
+- `fastapi_load`: Load one record for an entity. Supported entities: `iprank`, `json`.
 
 ## Operational features
 

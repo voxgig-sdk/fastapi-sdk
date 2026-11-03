@@ -6,11 +6,6 @@
 -- @voxgig/apidef VALID_CANON). Annotations only — no runtime effect. Do not
 -- edit by hand.
 
----@class IndexGet
-
----@class IndexGetLoadMatch
----@field ip? string
-
 ---@class Iprank
 
 ---@class IprankLoadMatch
@@ -19,18 +14,6 @@
 
 ---@class JsonLoadMatch
 ---@field ip? string
-
----@class Robot
-
----@class RobotLoadMatch
-
----@class Simple
-
----@class SimpleLoadMatch
-
----@class Table
-
----@class TableLoadMatch
 
 local M = {}
 

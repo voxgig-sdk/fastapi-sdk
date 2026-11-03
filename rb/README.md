@@ -4,7 +4,7 @@
 
 The Ruby SDK for the Fastapi API — an entity-oriented client using idiomatic Ruby conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `client.IndexGet` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Iprank` — with named operations (`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fastapi-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -39,13 +39,13 @@ require_relative "Fastapi_sdk"
 client = FastapiSDK.new
 ```
 
-### 3. Load an indexget
+### 3. Load an iprank
 
 ```ruby
 begin
-  # load returns the ENTITY — call data_get for the IndexGet record (raises on error).
-  indexget = client.IndexGet.load()
-  puts indexget
+  # load returns the ENTITY — call data_get for the Iprank record (raises on error).
+  iprank = client.Iprank.load()
+  puts iprank.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -127,9 +127,9 @@ Create a mock client for unit testing — no server required:
 client = FastapiSDK.test
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
+# data_get reads its mock record.
 iprank = client.Iprank.load()
-puts iprank
+puts iprank.data_get
 ```
 
 ### Use a custom fetch function
@@ -205,12 +205,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `IndexGet` | `(data) -> IndexGetEntity` | Create an IndexGet entity instance. |
 | `Iprank` | `(data) -> IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `(data) -> JsonEntity` | Create a Json entity instance. |
-| `Robot` | `(data) -> RobotEntity` | Create a Robot entity instance. |
-| `Simple` | `(data) -> SimpleEntity` | Create a Simple entity instance. |
-| `Table` | `(data) -> TableEntity` | Create a Table entity instance. |
 
 ### Entity interface
 
@@ -218,7 +214,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -228,9 +224,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `FastapiError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`FastapiError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -244,15 +241,6 @@ returns a result `Hash` with these keys:
 | `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
-
-#### IndexGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### Iprank
 
@@ -272,54 +260,9 @@ Operations: Load.
 
 API path: `/json`
 
-#### Robot
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/robots.txt`
-
-#### Simple
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/simple`
-
-#### Table
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/table`
-
 
 
 ## Entities
-
-
-### IndexGet
-
-Create an instance: `index_get = client.IndexGet`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ruby
-# load returns the ENTITY — call data_get for the IndexGet record (raises on error).
-index_get = client.IndexGet.load()
-```
 
 
 ### Iprank
@@ -355,60 +298,6 @@ Create an instance: `json = client.Json`
 ```ruby
 # load returns the ENTITY — call data_get for the Json record (raises on error).
 json = client.Json.load()
-```
-
-
-### Robot
-
-Create an instance: `robot = client.Robot`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ruby
-# load returns the ENTITY — call data_get for the Robot record (raises on error).
-robot = client.Robot.load()
-```
-
-
-### Simple
-
-Create an instance: `simple = client.Simple`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ruby
-# load returns the ENTITY — call data_get for the Simple record (raises on error).
-simple = client.Simple.load()
-```
-
-
-### Table
-
-Create an instance: `table = client.Table`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ruby
-# load returns the ENTITY — call data_get for the Table record (raises on error).
-table = client.Table.load()
 ```
 
 ## Features

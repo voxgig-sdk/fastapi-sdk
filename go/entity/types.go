@@ -12,15 +12,6 @@ import (
 	"github.com/voxgig-sdk/fastapi-sdk/go/core"
 )
 
-// IndexGet is the typed data model for the index_get entity.
-type IndexGet struct {
-}
-
-// IndexGetLoadMatch is the typed request payload for IndexGet.LoadTyped.
-type IndexGetLoadMatch struct {
-	Ip *string `json:"ip,omitempty"`
-}
-
 // Iprank is the typed data model for the iprank entity.
 type Iprank struct {
 }
@@ -36,30 +27,6 @@ type Json struct {
 // JsonLoadMatch is the typed request payload for Json.LoadTyped.
 type JsonLoadMatch struct {
 	Ip *string `json:"ip,omitempty"`
-}
-
-// Robot is the typed data model for the robot entity.
-type Robot struct {
-}
-
-// RobotLoadMatch is the typed request payload for Robot.LoadTyped.
-type RobotLoadMatch struct {
-}
-
-// Simple is the typed data model for the simple entity.
-type Simple struct {
-}
-
-// SimpleLoadMatch is the typed request payload for Simple.LoadTyped.
-type SimpleLoadMatch struct {
-}
-
-// Table is the typed data model for the table entity.
-type Table struct {
-}
-
-// TableLoadMatch is the typed request payload for Table.LoadTyped.
-type TableLoadMatch struct {
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -99,57 +100,11 @@ class Config {
             "content-type": "application/json"
         },
         entity: {
-            index_get: {},
             iprank: {},
             json: {},
-            robot: {},
-            simple: {},
-            table: {},
         }
     };
     entity = {
-        "index_get": {
-            "fields": [],
-            "name": "index_get",
-            "op": {
-                "load": {
-                    "input": "data",
-                    "name": "load",
-                    "points": [
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/",
-                            "segments": [],
-                            "parts": [],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "args": {
-                                "query": [
-                                    {
-                                        "name": "ip",
-                                        "orig": "ip",
-                                        "type": "`$STRING`",
-                                        "kind": "query"
-                                    }
-                                ]
-                            },
-                            "select": {
-                                "exist": [
-                                    "ip"
-                                ]
-                            }
-                        }
-                    ]
-                }
-            },
-            "relations": {
-                "ancestors": []
-            }
-        },
         "iprank": {
             "fields": [],
             "name": "iprank",
@@ -180,7 +135,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -224,116 +183,11 @@ class Config {
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "ip"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
-                        }
-                    ]
-                }
-            },
-            "relations": {
-                "ancestors": []
-            }
-        },
-        "robot": {
-            "fields": [],
-            "name": "robot",
-            "op": {
-                "load": {
-                    "input": "data",
-                    "name": "load",
-                    "points": [
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/robots.txt",
-                            "segments": [
-                                {
-                                    "lit": "robots.txt"
-                                }
-                            ],
-                            "parts": [
-                                "robots.txt"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "args": {},
-                            "select": {}
-                        }
-                    ]
-                }
-            },
-            "relations": {
-                "ancestors": []
-            }
-        },
-        "simple": {
-            "fields": [],
-            "name": "simple",
-            "op": {
-                "load": {
-                    "input": "data",
-                    "name": "load",
-                    "points": [
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/simple",
-                            "segments": [
-                                {
-                                    "lit": "simple"
-                                }
-                            ],
-                            "parts": [
-                                "simple"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "args": {},
-                            "select": {}
-                        }
-                    ]
-                }
-            },
-            "relations": {
-                "ancestors": []
-            }
-        },
-        "table": {
-            "fields": [],
-            "name": "table",
-            "op": {
-                "load": {
-                    "input": "data",
-                    "name": "load",
-                    "points": [
-                        {
-                            "kind": "http",
-                            "method": "GET",
-                            "orig": "/table",
-                            "segments": [
-                                {
-                                    "lit": "table"
-                                }
-                            ],
-                            "parts": [
-                                "table"
-                            ],
-                            "rename": {},
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "args": {},
-                            "select": {}
                         }
                     ]
                 }

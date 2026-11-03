@@ -10,95 +10,10 @@
     }
   ],
   "paths": {
-    "/simple": {
-      "get": {
-        "summary": "Simple",
-        "operationId": "simple_simple_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/robots.txt": {
-      "get": {
-        "summary": "Robotstxt",
-        "operationId": "robotstxt_robots_txt_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/table": {
-      "get": {
-        "summary": "Rich",
-        "operationId": "rich_table_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
-      }
-    },
     "/json": {
       "get": {
         "summary": "Index",
         "operationId": "index_json_get",
-        "parameters": [
-          {
-            "name": "ip",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "title": "Ip"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "summary": "Index",
-        "operationId": "index__get",
         "parameters": [
           {
             "name": "ip",

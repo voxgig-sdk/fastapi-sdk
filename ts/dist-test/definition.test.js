@@ -9,25 +9,6 @@ const utility_1 = require("./utility");
 // scheme names, and the definition's own response example.
 const PLAN = [
     {
-        "entity": "index_get",
-        "accessor": "IndexGet",
-        "op": "load",
-        "method": "GET",
-        "path": "/",
-        "args": [],
-        "select": {
-            "ip": "v1"
-        },
-        "headers": [],
-        "query": [
-            "ip"
-        ],
-        "auth": null,
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
         "entity": "iprank",
         "accessor": "Iprank",
         "op": "load",
@@ -36,7 +17,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": null,
@@ -53,54 +39,19 @@ const PLAN = [
             "ip": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "ip"
         ],
-        "auth": null,
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "robot",
-        "accessor": "Robot",
-        "op": "load",
-        "method": "GET",
-        "path": "/robots.txt",
-        "args": [],
-        "select": {},
-        "headers": [],
-        "query": [],
-        "auth": null,
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "simple",
-        "accessor": "Simple",
-        "op": "load",
-        "method": "GET",
-        "path": "/simple",
-        "args": [],
-        "select": {},
-        "headers": [],
-        "query": [],
-        "auth": null,
-        "status": 200,
-        "sample": null,
-        "idField": "id"
-    },
-    {
-        "entity": "table",
-        "accessor": "Table",
-        "op": "load",
-        "method": "GET",
-        "path": "/table",
-        "args": [],
-        "select": {},
-        "headers": [],
-        "query": [],
+        "queryArgs": [
+            {
+                "name": "ip",
+                "wire": "ip"
+            }
+        ],
         "auth": null,
         "status": 200,
         "sample": null,

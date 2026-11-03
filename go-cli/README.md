@@ -19,15 +19,15 @@ make build
 export FASTAPI_APIKEY=sk_live_xxx
 
 # 4. Each command line is ONE boru expression, run against the API:
-./fastapi-cli load 1 index_get            # {id:1} shorthand
-./fastapi-cli load '{id:1}' index_get       # explicit match map
+./fastapi-cli load 1 iprank            # {id:1} shorthand
+./fastapi-cli load '{id:1}' iprank       # explicit match map
 
 # 5. Override the API base URL for a single call
-FASTAPI_BASE=https://api.example.com ./fastapi-cli load 1 index_get
+FASTAPI_BASE=https://api.example.com ./fastapi-cli load 1 iprank
 
 # 6. No arguments -> interactive REPL
 ./fastapi-cli
-fastapi> load 1 index_get
+fastapi> load 1 iprank
 fastapi> /quit
 ```
 
@@ -53,7 +53,7 @@ fastapi> /quit
    arguments to open the REPL):
 
    ```sh
-   ./dist/*/fastapi-cli load 1 index_get
+   ./dist/*/fastapi-cli load 1 iprank
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
@@ -66,8 +66,8 @@ That is the whole loop: *build → set key → evaluate boru expressions*.
 ### Load a single record
 
 ```sh
-./fastapi-cli load 1 index_get          # scalar shorthand for {id:1}
-./fastapi-cli load '{id:1}' index_get     # explicit match map
+./fastapi-cli load 1 iprank          # scalar shorthand for {id:1}
+./fastapi-cli load '{id:1}' iprank     # explicit match map
 ```
 
 The query is either a **scalar** (`1`, treated as `{id:1}`) or a **match map**
@@ -80,7 +80,7 @@ Configuration is read from the environment — nothing is written to disk:
 ```sh
 export FASTAPI_APIKEY=sk_live_xxx            # API key
 export FASTAPI_BASE=https://api.example.com  # optional: override the API base URL
-./fastapi-cli load 1 index_get
+./fastapi-cli load 1 iprank
 ```
 
 Both are injectable by a secrets vault, so the key never has to be typed inline.
@@ -92,7 +92,7 @@ evaluated as its own boru expression:
 
 ```text
 $ ./fastapi-cli
-fastapi> load 1 index_get
+fastapi> load 1 iprank
 fastapi> /help
 fastapi> /quit
 ```
@@ -107,7 +107,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 ### Discover the available entities
 
 `/help` in the REPL prints the full entity list, or see [Entities](#entities)
-below — this SDK exposes 6 entities.
+below — this SDK exposes 2 entities.
 
 ## Reference
 
@@ -119,7 +119,7 @@ The CLI registers these boru words, each bound to the SDK:
 |----------|-----------------------------------------------|--------------------------------|
 | `load`   | `load <entity>` · `load <query> <entity>`     | A single record                |
 
-- `<entity>` is a bareword, auto-quoted as an boru atom (e.g. `index_get`).
+- `<entity>` is a bareword, auto-quoted as an boru atom (e.g. `iprank`).
 - `<query>` is either a **Map** (`{id:1}`) or a **Scalar** (`1`, treated as
   `{id:1}`). A scalar is always wrapped as `{id:<value>}`.
 
@@ -160,9 +160,9 @@ Meta-commands use the `/` prefix (everything else on a line is evaluated as boru
 
 ### Entities
 
-The 6 entities this SDK exposes (any is valid as `<entity>`):
+The 2 entities this SDK exposes (any is valid as `<entity>`):
 
-index_get iprank json robot simple table
+iprank json
 
 ## Explanation
 

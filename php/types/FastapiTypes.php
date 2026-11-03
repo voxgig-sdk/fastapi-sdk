@@ -12,17 +12,6 @@ declare(strict_types=1);
 // registered on the composer classmap autoload. The SDK boundary exchanges
 // assoc-arrays; these classes name the shapes for tooling and typed callers.
 
-/** IndexGet entity data model. */
-class IndexGet
-{
-}
-
-/** Request payload for IndexGet#load. */
-class IndexGetLoadMatch
-{
-    public ?string $ip = null;
-}
-
 /** Iprank entity data model. */
 class Iprank
 {
@@ -42,35 +31,5 @@ class Json
 class JsonLoadMatch
 {
     public ?string $ip = null;
-}
-
-/** Robot entity data model. */
-class Robot
-{
-}
-
-/** Request payload for Robot#load. */
-class RobotLoadMatch
-{
-}
-
-/** Simple entity data model. */
-class Simple
-{
-}
-
-/** Request payload for Simple#load. */
-class SimpleLoadMatch
-{
-}
-
-/** Table entity data model. */
-class Table
-{
-}
-
-/** Request payload for Table#load. */
-class TableLoadMatch
-{
 }
 

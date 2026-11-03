@@ -5,7 +5,7 @@
 The TypeScript SDK for the Fastapi API — a type-safe, entity-oriented client with full async/await support.
 
 The API is exposed as capitalised, semantic **Entities** — e.g.
-`client.IndexGet()` — each with a small set of operations (`load`)
+`client.Iprank()` — each with a small set of operations (`load`)
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
@@ -15,7 +15,7 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)), or from a
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fastapi-sdk/tags)), or from a
 clone, which carries the compiled `dist/`:
 
 ```bash
@@ -37,14 +37,14 @@ import { FastapiSDK } from '@voxgig-sdk/fastapi-sdk'
 const client = new FastapiSDK()
 ```
 
-### 3. Load an indexget
+### 3. Load an iprank
 
-`load()` returns the entity directly and throws on failure:
+`load()` returns the entity and throws on failure; `.data()` reads its record:
 
 ```ts
 try {
-  const indexget = await client.IndexGet().load()
-  console.log(indexget)
+  const iprank = await client.Iprank().load()
+  console.log(iprank.data())
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -58,14 +58,15 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 ```ts
 try {
   const iprank = await client.Iprank().load()
-  console.log(iprank)
+  console.log(iprank.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -74,8 +75,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -93,9 +94,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -125,9 +123,8 @@ Create a mock client for unit testing — no server required:
 const client = FastapiSDK.test()
 
 const iprank = await client.Iprank().load()
-// iprank is the entity, populated with mock response data
-// — call iprank.data() for the record itself
-console.log(iprank)
+// iprank is the Iprank entity; .data() reads its mock record
+console.log(iprank.data())
 ```
 
 You can also use the instance method:
@@ -225,12 +222,8 @@ new FastapiSDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `IndexGet(data?)` | `IndexGetEntity` | Create an IndexGet entity instance. |
 | `Iprank(data?)` | `IprankEntity` | Create an Iprank entity instance. |
 | `Json(data?)` | `JsonEntity` | Create a Json entity instance. |
-| `Robot(data?)` | `RobotEntity` | Create a Robot entity instance. |
-| `Simple(data?)` | `SimpleEntity` | Create a Simple entity instance. |
-| `Table(data?)` | `TableEntity` | Create a Table entity instance. |
 | `tester(testopts?, sdkopts?)` | `FastapiSDK` | Create a test-mode client instance. |
 
 #### Static methods
@@ -247,7 +240,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -256,8 +249,8 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `load` resolves to a single entity object.
 
@@ -295,15 +288,6 @@ The `prepare()` method returns:
 
 ### Entities
 
-#### IndexGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: load.
-
-API path: `/`
-
 #### Iprank
 
 | Field | Description |
@@ -322,53 +306,9 @@ Operations: load.
 
 API path: `/json`
 
-#### Robot
-
-| Field | Description |
-| --- | --- |
-
-Operations: load.
-
-API path: `/robots.txt`
-
-#### Simple
-
-| Field | Description |
-| --- | --- |
-
-Operations: load.
-
-API path: `/simple`
-
-#### Table
-
-| Field | Description |
-| --- | --- |
-
-Operations: load.
-
-API path: `/table`
-
 
 
 ## Entities
-
-
-### IndexGet
-
-Create an instance: `const index_get = client.IndexGet()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ts
-const index_get = await client.IndexGet().load()
-```
 
 
 ### Iprank
@@ -402,57 +342,6 @@ Create an instance: `const json = client.Json()`
 
 ```ts
 const json = await client.Json().load()
-```
-
-
-### Robot
-
-Create an instance: `const robot = client.Robot()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ts
-const robot = await client.Robot().load()
-```
-
-
-### Simple
-
-Create an instance: `const simple = client.Simple()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ts
-const simple = await client.Simple().load()
-```
-
-
-### Table
-
-Create an instance: `const table = client.Table()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```ts
-const table = await client.Table().load()
 ```
 
 ## Features

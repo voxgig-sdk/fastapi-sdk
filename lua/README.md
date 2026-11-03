@@ -4,7 +4,7 @@
 
 The Lua SDK for the Fastapi API — an entity-oriented client using Lua conventions.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client:IndexGet()` — each with the same small set of operations (`load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Iprank()` — each with the same small set of operations (`load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ It exposes the API as capitalised, semantic **Entities** — e.g. `client:IndexG
 
 ## Install
 This package is not yet published to LuaRocks. Install it from the
-GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)),
+GitHub release tag (`lua/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fastapi-sdk/tags)),
 or add the source directory to your `LUA_PATH`:
 
 ```bash
@@ -33,12 +33,14 @@ local sdk = require("fastapi_sdk")
 local client = sdk.new()
 ```
 
-### 3. Load an indexget
+### 3. Load an iprank
+
+`load` returns the entity; `data_get()` reads its record.
 
 ```lua
-local indexget, err = client:IndexGet():load()
+local iprank, err = client:Iprank():load()
 if err then error(err) end
-print(indexget)
+for k, val in pairs(iprank:data_get()) do print(k, val) end
 ```
 
 
@@ -107,7 +109,7 @@ Create a mock client for unit testing — no server required:
 local client = sdk.test()
 
 local result, err = client:Iprank():load()
--- result is the returned data; err is set on failure
+-- result is the entity; data_get() reads its mock record; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -185,12 +187,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `IndexGet` | `(data) -> IndexGetEntity` | Create an IndexGet entity instance. |
 | `Iprank` | `(data) -> IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `(data) -> JsonEntity` | Create a Json entity instance. |
-| `Robot` | `(data) -> RobotEntity` | Create a Robot entity instance. |
-| `Simple` | `(data) -> SimpleEntity` | Create a Simple entity instance. |
-| `Table` | `(data) -> TableEntity` | Create a Table entity instance. |
 
 ### Entity interface
 
@@ -198,7 +196,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
+| `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria, and return it. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -208,32 +206,23 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(value, err)`. The `value` is the operation's
-data **directly** — there is no wrapper:
+Entity operations return `(value, err)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` | the entity record (a `table`) |
+| `load` | the entity, whose `data_get()` reads its record (a `table`) |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local index_get, err = client:IndexGet():load()
+    local iprank, err = client:Iprank():load()
     if err then error(err) end
-    -- index_get is the loaded record
+    -- iprank is the loaded entity
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
 
 ### Entities
-
-#### IndexGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### Iprank
 
@@ -253,53 +242,9 @@ Operations: Load.
 
 API path: `/json`
 
-#### Robot
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/robots.txt`
-
-#### Simple
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/simple`
-
-#### Table
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/table`
-
 
 
 ## Entities
-
-
-### IndexGet
-
-Create an instance: `local index_get = client:IndexGet(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```lua
-local index_get, err = client:IndexGet():load()
-```
 
 
 ### Iprank
@@ -333,57 +278,6 @@ Create an instance: `local json = client:Json(nil)`
 
 ```lua
 local json, err = client:Json():load()
-```
-
-
-### Robot
-
-Create an instance: `local robot = client:Robot(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```lua
-local robot, err = client:Robot():load()
-```
-
-
-### Simple
-
-Create an instance: `local simple = client:Simple(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```lua
-local simple, err = client:Simple():load()
-```
-
-
-### Table
-
-Create an instance: `local table = client:Table(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```lua
-local table, err = client:Table():load()
 ```
 
 ## Features

@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { FastapiSDK, BaseFeature, stdutil } from '../../..'
+import { FastapiSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,8 @@ describe('IprankEntity', async () => {
   })
 
 
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.FASTAPI_TEST_LIVE
@@ -51,7 +53,7 @@ describe('IprankEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"iprank","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /stat/iprank","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/stat/iprank","q":{},"r":{},"s":[{"lit":"stat"},{"lit":"iprank"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"iprank","name__orig":"iprank","Name":"Iprank","name_":"iprank","name-":"iprank","NAME":"IPRANK","index$":1}, {"active":true,"entity":"iprank","key$":"BasicIprankFlow","kind":"basic","name":"BasicIprankFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"iprank_ref01","srcdatavar":"iprank_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-iprank_ref01"}}],"index$":0}]}, 'Iprank', {"GET /stat/iprank":{"protocol":"http","parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{},"name":"iprank","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /stat/iprank","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/stat/iprank","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"stat"},{"lit":"iprank"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"iprank","name__orig":"iprank","Name":"Iprank","name_":"iprank","name-":"iprank","NAME":"IPRANK","index$":0}, {"active":true,"entity":"iprank","key$":"BasicIprankFlow","kind":"basic","name":"BasicIprankFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"iprank_ref01","srcdatavar":"iprank_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-iprank_ref01"}}],"index$":0}]}, 'Iprank', {"GET /stat/iprank":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +74,12 @@ describe('IprankEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

@@ -16,14 +16,6 @@ from __future__ import annotations
 from typing import TypedDict, Any
 
 
-class IndexGet(TypedDict):
-    pass
-
-
-class IndexGetLoadMatch(TypedDict, total=False):
-    ip: str
-
-
 class Iprank(TypedDict):
     pass
 
@@ -38,27 +30,3 @@ class Json(TypedDict):
 
 class JsonLoadMatch(TypedDict, total=False):
     ip: str
-
-
-class Robot(TypedDict):
-    pass
-
-
-class RobotLoadMatch(TypedDict):
-    pass
-
-
-class Simple(TypedDict):
-    pass
-
-
-class SimpleLoadMatch(TypedDict):
-    pass
-
-
-class Table(TypedDict):
-    pass
-
-
-class TableLoadMatch(TypedDict):
-    pass

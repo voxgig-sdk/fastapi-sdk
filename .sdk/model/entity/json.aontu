@@ -28,10 +28,9 @@ main: kit: entity: json: {
           }
           m: "GET"
           o: "/json"
-          q: {
-            exist: [
-              "ip"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

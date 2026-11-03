@@ -20,7 +20,7 @@ import (
 const prompt = "fastapi"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "index_get iprank json robot simple table"
+const entitiesHelp = "iprank json"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

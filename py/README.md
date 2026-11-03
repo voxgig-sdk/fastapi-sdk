@@ -4,7 +4,7 @@
 
 The Python SDK for the Fastapi API — an entity-oriented client following Pythonic conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `client.IndexGet()` — each
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Iprank()` — each
 carrying a small, uniform set of operations (`load`) instead of raw URL
 paths and query strings. You work with named resources and verbs, which
 keeps the cognitive load low.
@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to PyPI. Install it from the GitHub
-release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/fastapi-sdk/releases)) or
+release tag (`py/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/fastapi-sdk/tags)) or
 from a source checkout:
 
 ```bash
@@ -36,14 +36,14 @@ from fastapi_sdk import FastapiSDK
 client = FastapiSDK()
 ```
 
-### 3. Load an indexget
+### 3. Load an iprank
 
 `load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
-    indexget = client.IndexGet().load()
-    print(indexget)
+    iprank = client.Iprank().load()
+    print(iprank.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -56,7 +56,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 ```python
 try:
     iprank = client.Iprank().load()
-    print(iprank)
+    print(iprank.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -122,10 +122,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = FastapiSDK.test()
 
-# Entity ops return the ENTITY and raises on error;
-# call data_get() for the record.
+# Entity ops return the entity, and list one per record; they raise on error.
 iprank = client.Iprank().load()
-# iprank contains the mock response record
+# data_get() on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -201,12 +200,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `IndexGet` | `(data) -> IndexGetEntity` | Create an IndexGet entity instance. |
 | `Iprank` | `(data) -> IprankEntity` | Create an Iprank entity instance. |
 | `Json` | `(data) -> JsonEntity` | Create a Json entity instance. |
-| `Robot` | `(data) -> RobotEntity` | Create a Robot entity instance. |
-| `Simple` | `(data) -> SimpleEntity` | Create a Simple entity instance. |
-| `Table` | `(data) -> TableEntity` | Create a Table entity instance. |
 
 ### Entity interface
 
@@ -214,7 +209,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -224,9 +219,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
-ops, a `list` for `list`) and raise on error. Wrap calls in
-`try`/`except` to handle failures.
+Entity operations return the entity, and `list` a `list` of entities, one
+per record; an entity's `data_get()` reads its record (a `dict`). They raise
+on error, so wrap calls in `try`/`except` to handle failures.
 
 The `direct()` escape hatch never raises — it returns a result `dict`
 you branch on via `result["ok"]`:
@@ -241,15 +236,6 @@ you branch on via `result["ok"]`:
 On error, `ok` is `False` and `err` contains the error value.
 
 ### Entities
-
-#### IndexGet
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/`
 
 #### Iprank
 
@@ -269,53 +255,9 @@ Operations: Load.
 
 API path: `/json`
 
-#### Robot
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/robots.txt`
-
-#### Simple
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/simple`
-
-#### Table
-
-| Field | Description |
-| --- | --- |
-
-Operations: Load.
-
-API path: `/table`
-
 
 
 ## Entities
-
-
-### IndexGet
-
-Create an instance: `index_get = client.IndexGet()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```python
-index_get = client.IndexGet().load()
-```
 
 
 ### Iprank
@@ -349,57 +291,6 @@ Create an instance: `json = client.Json()`
 
 ```python
 json = client.Json().load()
-```
-
-
-### Robot
-
-Create an instance: `robot = client.Robot()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```python
-robot = client.Robot().load()
-```
-
-
-### Simple
-
-Create an instance: `simple = client.Simple()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```python
-simple = client.Simple().load()
-```
-
-
-### Table
-
-Create an instance: `table = client.Table()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Example: Load
-
-```python
-table = client.Table().load()
 ```
 
 ## Features

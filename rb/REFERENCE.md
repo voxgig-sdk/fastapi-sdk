@@ -41,10 +41,6 @@ client = FastapiSDK.test
 
 ### Instance Methods
 
-#### `IndexGet(data = nil)`
-
-Create a new `IndexGet` entity instance. Pass `nil` for no initial data.
-
 #### `Iprank(data = nil)`
 
 Create a new `Iprank` entity instance. Pass `nil` for no initial data.
@@ -52,18 +48,6 @@ Create a new `Iprank` entity instance. Pass `nil` for no initial data.
 #### `Json(data = nil)`
 
 Create a new `Json` entity instance. Pass `nil` for no initial data.
-
-#### `Robot(data = nil)`
-
-Create a new `Robot` entity instance. Pass `nil` for no initial data.
-
-#### `Simple(data = nil)`
-
-Create a new `Simple` entity instance. Pass `nil` for no initial data.
-
-#### `Table(data = nil)`
-
-Create a new `Table` entity instance. Pass `nil` for no initial data.
 
 #### `options_map -> Hash`
 
@@ -103,52 +87,6 @@ same parameters as `direct()`. Raises on error.
 
 ---
 
-## IndexGetEntity
-
-```ruby
-index_get = client.IndexGet
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Raises on error.
-
-```ruby
-result = client.IndexGet.load()
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `IndexGetEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
 ## IprankEntity
 
 ```ruby
@@ -159,7 +97,7 @@ iprank = client.Iprank
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Iprank.load()
@@ -205,7 +143,7 @@ json = client.Json
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
 result = client.Json.load()
@@ -232,144 +170,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `JsonEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## RobotEntity
-
-```ruby
-robot = client.Robot
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Raises on error.
-
-```ruby
-result = client.Robot.load()
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `RobotEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## SimpleEntity
-
-```ruby
-simple = client.Simple
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Raises on error.
-
-```ruby
-result = client.Simple.load()
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `SimpleEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## TableEntity
-
-```ruby
-table = client.Table
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl = nil) -> result`
-
-Load a single entity matching the given criteria. Raises on error.
-
-```ruby
-result = client.Table.load()
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `TableEntity` instance with the same client and
 options.
 
 #### `get_name -> String`
@@ -536,6 +336,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

@@ -41,10 +41,6 @@ $client = FastapiSDK::test();
 
 ### Instance Methods
 
-#### `IndexGet($data = null)`
-
-Create a new `IndexGetEntity` instance. Pass `null` for no initial data.
-
 #### `Iprank($data = null)`
 
 Create a new `IprankEntity` instance. Pass `null` for no initial data.
@@ -52,18 +48,6 @@ Create a new `IprankEntity` instance. Pass `null` for no initial data.
 #### `Json($data = null)`
 
 Create a new `JsonEntity` instance. Pass `null` for no initial data.
-
-#### `Robot($data = null)`
-
-Create a new `RobotEntity` instance. Pass `null` for no initial data.
-
-#### `Simple($data = null)`
-
-Create a new `SimpleEntity` instance. Pass `null` for no initial data.
-
-#### `Table($data = null)`
-
-Create a new `TableEntity` instance. Pass `null` for no initial data.
 
 #### `options_map(): array`
 
@@ -102,52 +86,6 @@ Prepare a fetch definition without sending the request. Returns the
 
 ---
 
-## IndexGetEntity
-
-```php
-$index_get = $client->IndexGet();
-```
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Throws on error.
-
-```php
-$result = $client->IndexGet()->load();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): IndexGetEntity`
-
-Create a new `IndexGetEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
 ## IprankEntity
 
 ```php
@@ -158,7 +96,7 @@ $iprank = $client->Iprank();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Iprank()->load();
@@ -204,7 +142,7 @@ $json = $client->Json();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Json()->load();
@@ -231,144 +169,6 @@ Set the entity match criteria.
 #### `make(): JsonEntity`
 
 Create a new `JsonEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## RobotEntity
-
-```php
-$robot = $client->Robot();
-```
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Throws on error.
-
-```php
-$result = $client->Robot()->load();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): RobotEntity`
-
-Create a new `RobotEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## SimpleEntity
-
-```php
-$simple = $client->Simple();
-```
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Throws on error.
-
-```php
-$result = $client->Simple()->load();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): SimpleEntity`
-
-Create a new `SimpleEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## TableEntity
-
-```php
-$table = $client->Table();
-```
-
-### Operations
-
-#### `load(array $reqmatch, ?array $ctrl = null): mixed`
-
-Load a single entity matching the given criteria. Throws on error.
-
-```php
-$result = $client->Table()->load();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): TableEntity`
-
-Create a new `TableEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -535,6 +335,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

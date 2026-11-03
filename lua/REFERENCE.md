@@ -40,10 +40,6 @@ local client = sdk.test()
 
 ### Instance Methods
 
-#### `IndexGet(data)`
-
-Create a new `IndexGet` entity instance. Pass `nil` for no initial data.
-
 #### `Iprank(data)`
 
 Create a new `Iprank` entity instance. Pass `nil` for no initial data.
@@ -51,18 +47,6 @@ Create a new `Iprank` entity instance. Pass `nil` for no initial data.
 #### `Json(data)`
 
 Create a new `Json` entity instance. Pass `nil` for no initial data.
-
-#### `Robot(data)`
-
-Create a new `Robot` entity instance. Pass `nil` for no initial data.
-
-#### `Simple(data)`
-
-Create a new `Simple` entity instance. Pass `nil` for no initial data.
-
-#### `Table(data)`
-
-Create a new `Table` entity instance. Pass `nil` for no initial data.
 
 #### `options_map() -> table`
 
@@ -100,52 +84,6 @@ same parameters as `direct()`.
 
 ---
 
-## IndexGetEntity
-
-```lua
-local index_get = client:IndexGet(nil)
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria.
-
-```lua
-local result, err = client:IndexGet():load()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `IndexGetEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
 ## IprankEntity
 
 ```lua
@@ -156,7 +94,7 @@ local iprank = client:Iprank(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Iprank():load()
@@ -202,7 +140,7 @@ local json = client:Json(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Json():load()
@@ -229,144 +167,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `JsonEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## RobotEntity
-
-```lua
-local robot = client:Robot(nil)
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria.
-
-```lua
-local result, err = client:Robot():load()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `RobotEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## SimpleEntity
-
-```lua
-local simple = client:Simple(nil)
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria.
-
-```lua
-local result, err = client:Simple():load()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `SimpleEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## TableEntity
-
-```lua
-local table = client:Table(nil)
-```
-
-### Operations
-
-#### `load(reqmatch, ctrl) -> any, err`
-
-Load a single entity matching the given criteria.
-
-```lua
-local result, err = client:Table():load()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `TableEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -533,6 +333,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and
